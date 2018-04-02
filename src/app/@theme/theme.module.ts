@@ -61,13 +61,22 @@ const NB_THEME_PROVIDERS = [
 
 
 const COMPONENTS = [
-  Header1Component
+  Header1Component,
+  SampleLayoutComponent
 ]
+
+const PIPES = [
+  CapitalizePipe,
+  PluralPipe,
+  RoundPipe,
+  TimingPipe,
+];
+
 
 @NgModule({
   imports: [...BASE_MODULES, ...NB_MODULES],
-  exports: [...BASE_MODULES, ...NB_MODULES,...COMPONENTS],
-  declarations: [...COMPONENTS,  ...COMPONENTS]
+  exports: [...BASE_MODULES, ...NB_MODULES,...COMPONENTS,...PIPES],
+  declarations: [...COMPONENTS,  ...PIPES]
 })
 export class ThemeModule { 
   static forRoot(): ModuleWithProviders{

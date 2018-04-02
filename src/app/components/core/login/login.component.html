@@ -1,0 +1,145 @@
+<!-- <div class="hold-transition login-page" style="height: 100%;">
+        <div class="login-box">
+            <div class="login-logo">
+              <a href="#"><b>Love</b>Bonito</a>
+            </div>           
+            <div class="login-box-body">
+              <p class="login-box-msg">Sign in to start your session</p>
+          
+              <form #frmuser="ngForm" (ngSubmit) ="onSubmit(frmuser)">
+                <div class="form-group has-feedback">
+                  <input type="text" 
+                  class="form-control" 
+                  name="username"
+                  #username ="ngModel"
+                  placeholder="username" [(ngModel)] = "user.username" required >
+                  <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                  {{user.errors | json}}
+                </div>
+                <div class="form-group has-feedback">
+                  <input type="password" class="form-control"
+                   name = "password"
+                   #password ="ngModel"
+                   placeholder="Password"  [(ngModel)] = "user.password"  required >
+                  <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="row">
+                  <div class="col-xs-8">
+                    <div class="checkbox icheck">
+                      <label>
+                        <input type="checkbox"> Remember Me
+                      </label>
+                    </div>
+                  </div>                
+                  <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                  </div>               
+                </div>
+              </form>          
+              <div class="social-auth-links text-center">
+                <p>- OR -</p>
+                <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
+                  Facebook</a>
+                <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
+                  Google+</a>
+              </div>
+            </div>
+          </div>    
+    </div> -->
+
+<!-- <div class="wrapper"> 
+  <form >
+    <img src="./../../../../assets/img/user8-128x128.jpg" />
+    <div class="form-input">
+        <input type="text" name="username" placeholder="enter username" >
+    </div>
+    <div class="form-input">
+      <input type="password" name="password" placeholder="enter password">
+    </div>
+    <input type="submit" class="btn-login" name="submit" value="Login" >
+    <br/>
+    <a href="">Foget passwod</a>
+  </form>
+</div> -->
+    
+
+<div class="login-wrapper">
+  <div class="login-header">
+    <ul class="top-links">
+      <li>
+        <a href="#">
+          <span class="fas fa-map-marker"></span> Find Us
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <span class="fas fa-info-circle"></span> Help &amp; Support
+        </a>
+      </li>
+    </ul>
+    <div class="msg-container">
+      <strong>Phishing Alert:</strong>
+      Please be aware that there are emails and automated phone calls targetting DBS customers. Be sure to never give out sensitive personal information over email or phone. Click <a href="#">here</a> for more details.
+    </div>
+  </div>
+  <div class="login-content">
+    <form class="login-form" #frmuser="ngForm" (ngSubmit) ="onSubmit(frmuser)">
+      <h3 class="login-logo">DBS Bank</h3>
+      <div class="form-group">
+        <label for="username" class="form-control-label">User ID</label>
+        <input name="username" type="text" class="form-control"    #username ="ngModel"  [(ngModel)] = "user.username" required >
+        <span class="validation-msg error hide">Sorry, you have entered an invalid User ID.</span>
+      </div>
+      <div class="form-group">
+        <label for="password" class="form-control-label">PIN</label>
+        <input name="password" type="password" class="form-control"  name = "password"
+        #password ="ngModel"  [(ngModel)] = "user.password"  required>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary btn-block">Login</button>
+        <a href="#" class="btn btn-secondary btn-block">Getting Started</a>
+      </div>
+      <ul class="login-links">
+        <li><a href="#">Forgot User ID or PIN</a></li>
+        <li><a href="#">Frequently Asked Questions</a></li>
+        <li><a href="#">Maintenance Schedule</a></li>
+        <li><a href="#">Security &amp; You</a></li>
+      </ul>
+    </form>
+  </div>
+  <div class="login-footer">
+    <div class="bottom-links">
+      <h3>Happy Easter</h3>
+      <ul class="top-links">
+          <li>
+            <a href="#"><span class="fas fa-map-marker"></span> Find Us</a>
+          </li>
+          <li>
+            <a href="#"><span class="fas fa-info-circle"></span> Help &amp; Support</a>
+          </li>
+        </ul>
+      <ul>
+        <li><a href="#">Term &amp; Condition</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Fair Dealing Commitment</a></li>
+        <li><a href="#">Compliance with Tax Requirements</a></li>
+        <li><a href="#">&copy; 2018 DBS Bank Ltd. Co. Reg. No. 196800306E</a></li>
+      </ul>
+    </div>
+    <ul class="social-links">
+      <li>
+        <span class="icon icon-facebook"></span>
+      </li>
+      <li>
+          <span class="icon icon-twitter"></span>
+      </li>
+      <li>
+          <span class="icon icon-linkedin"></span>
+      </li>
+      <li>
+          <span class="icon icon-youtube"></span>
+      </li>
+    </ul>
+  </div>
+</div>
+

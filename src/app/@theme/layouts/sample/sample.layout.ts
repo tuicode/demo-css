@@ -16,8 +16,8 @@ import 'rxjs/add/operator/delay';
 
 @Component({
   selector: 'app-sample',
-  templateUrl: './sample.component.html',
-  styleUrls: ['./sample.component.scss']
+  templateUrl: './sample.layout.html',
+  styleUrls: ['./sample.layout.scss']
 })
 export class SampleLayoutComponent implements OnInit {
 

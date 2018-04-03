@@ -1,4 +1,5 @@
-:host {
+$back-ground: red;
 
-    background: nb-theme(card-bg); // and use it
-  }
+body{
+  background-color:  $back-ground;
+}

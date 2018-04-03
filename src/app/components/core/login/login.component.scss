@@ -30,14 +30,11 @@ body {
   
   .login-wrapper {
     display: flex;
-    flex-direction: column;
-  
+    flex-direction: column;  
     width: 100%;
-    min-height: 100vh;
-  
-    color: #FFFFFF;
-  
-    background: #4a4a4a url('./../../../../assets/img/easter-2017.jpg') center center no-repeat;
+    min-height: 100vh;  
+    color: #FFFFFF;  
+    background: #4a4a4a url('./../../../../assets/img/bg1.jpg') center center no-repeat;
     background-size: cover;
   }
   

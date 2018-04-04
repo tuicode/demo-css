@@ -16,12 +16,15 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="./assets/Ionicons/css/ionicons.min.css">
 
-    <!-- jvectormap -->
-    <link rel="stylesheet" href="./assets/jvectormap/jquery-jvectormap.css">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="./assets/jvectormap/jquery-jvectormap.css">
 
   <link rel="stylesheet" href="./assets/css/AdminLTE.min.css" />
   <!-- <link rel="stylesheet" href="./assets/css/normalize.css" /> -->
   <link rel="stylesheet" href="./assets/css/skins/_all-skins.min.css">
+  
+  <!-- <link rel="stylesheet" href="./assets/primeng/primeng.css">
+  <link rel="stylesheet" href="./assets/primeng/themes/omega/theme.css"> -->
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
@@ -34,11 +37,23 @@
 
 </head>
 
-<body>
+<body class="hold-transition skin-blue sidebar-mini">
   <app-root></app-root>
-  <!-- <script >
+
+  <script src="./assets/jquery/dist/jquery.min.js"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="./assets/jquery-ui/jquery-ui.min.js"></script>
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <script>
     $.widget.bridge('uibutton', $.ui.button);
   </script>
+  <!-- Bootstrap 3.3.7 -->
+  <script src="./assets/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- Sparkline -->
+  <script src="./assets/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="./assets/js/adminlte.min.js"></script>
+
   <script>
     $(document).ready(function () {
       var inputs = document.querySelectorAll('.form-control1');
@@ -53,23 +68,8 @@
           }
         });
       }
-    }) -->
-
-  <!-- </script> -->
-
-  <script src="./assets/jquery/dist/jquery.min.js"></script>
-  <!-- jQuery UI 1.11.4 -->
-  <script src="./assets/jquery-ui/jquery-ui.min.js"></script>
-  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-  <script>
-    $.widget.bridge('uibutton', $.ui.button);
+    })
   </script>
-  <!-- Bootstrap 3.3.7 -->
-  <script src="./assets/bootstrap/dist/js/bootstrap.min.js"></script>
-  <!-- Sparkline -->
-<script src="./assets/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
-  <!-- AdminLTE App -->
-<script src="./assets/js/adminlte.min.js"></script>
 </body>
 
 </html>

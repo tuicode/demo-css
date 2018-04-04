@@ -5,6 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
 import { FormsModule } from '@angular/forms';
+import { AccordionModule } from 'primeng/primeng';
+import { PanelModule } from 'primeng/primeng';
+import { ButtonModule } from 'primeng/primeng';
+import { RadioButtonModule } from 'primeng/primeng';
+import { CheckboxModule } from 'primeng/primeng';
+import { PaginatorModule } from 'primeng/primeng';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app.component';
@@ -40,6 +49,14 @@ import { CustomerComponent } from './components/customer/customer.component';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    AccordionModule,
+    PanelModule,
+    ButtonModule,
+    RadioButtonModule,
+    CheckboxModule,
+    PaginatorModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [AuthGuard, AuthService,

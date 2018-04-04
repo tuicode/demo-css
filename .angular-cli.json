@@ -19,12 +19,9 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "../node_modules/primeng/resources/primeng.css",
-        "../node_modules/primeng/resources/themes/omega/theme.css",
         "styles.css"
       ],
-      "scripts": [  
-      ],
+      "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

@@ -10,7 +10,7 @@ export class AuthService {
     private router: Router
   ) { }
 
-  get isLoggedIn() {
+  isLoggedIn() {
     return this.loggedIn.asObservable();
   }
 

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AccordionModule } from 'primeng/primeng';
 import { PanelModule } from 'primeng/primeng';
 import { ButtonModule } from 'primeng/primeng';
@@ -30,6 +30,7 @@ import { HeaderComponent } from './core/header/header.component';
 import { OrderComponent } from './components/order/order.component';
 import { CustomerComponent } from './components/customer/customer.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,10 +48,10 @@ import { CustomerComponent } from './components/customer/customer.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    FormsModule,    
+    ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule,
     AccordionModule,
     PanelModule,
     ButtonModule,

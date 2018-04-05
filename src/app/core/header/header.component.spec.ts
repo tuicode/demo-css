@@ -20,6 +20,7 @@ describe('HeaderComponent', () => {
   });
 
   it('should create', () => {
+    console.log('component ',component);
     expect(component).toBeTruthy();
   });
 });

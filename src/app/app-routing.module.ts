@@ -11,10 +11,12 @@ import { ContentWrapperComponent } from './core/content-wrapper/content-wrapper.
 import { OrderComponent } from './components/order/order.component';
 
 const routes: Routes = [
+  
   {
     path: '',
     component: HomeLayoutComponent,
     canActivate: [AuthGuard],
+    pathMatch: 'full',
     children: [{
       path: '',
       component: ContentWrapperComponent

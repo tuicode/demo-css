@@ -13,13 +13,16 @@ import { NgForm } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   public user : User = new User() ;
-  public isCustomerLogo   =false;
+  public isCustomerLogo   =false; 
+
   constructor(
     private authService : AuthService
   ) { }
 
   ngOnInit() {
   }
+
+
 
   onSubmit(frmuser: NgForm)
   {

@@ -26,85 +26,38 @@
 
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview">
-                <a routerLink="/">
+            <li class="treeview" *ngFor="let item of navItems" >
+                <a routerLink="">
                     <i class="fa fa-dashboard"></i>
-                    <span>Dashboard</span>
+                    <span> {{item.displayName}}</span>
+                    <span class="pull-right-container" *ngIf="item.children.length >0">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu" *ngFor="let child of item.children">
 
-                </a>
-            </li>
-            <li>
-                <a routerLink="/order">
-                    <i class="fa fa-calendar"></i>
-                    <span>Order</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-            </li>
-            <li>
-                <a routerLink="/customer">
-                    <i class="fa fa-calendar"></i>
-                    <span>Customer</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-            </li>
-
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-share"></i>
-                    <span>Multilevel</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li>
+                    <li *ngIf="child.children.length > 0" class="treeview">
                         <a href="#">
-                            <i class="fa fa-circle-o"></i> Level One</a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-circle-o"></i> Level One
+                            <i class="fa fa-circle-o"></i>{{child.displayName}}
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
-                        <ul class="treeview-menu">
-                            <li>
+                        <ul class="treeview-menu" *ngFor="let deepchild of child.children">
+                            <li *ngIf="deepchild.children.length > 0" class="treeview">
                                 <a href="#">
-                                    <i class="fa fa-circle-o"></i> Level Two</a>
-                            </li>
-                            <li class="treeview">
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i> Level Two
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-circle-o"></i> Level Three</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-circle-o"></i> Level Three</a>
-                                    </li>
-                                </ul>
+                                    <i class="fa fa-circle-o"></i> {{deepchild.displayName}}</a>
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li *ngIf="child.children.length === 0">
                         <a href="#">
-                            <i class="fa fa-circle-o"></i> Level One</a>
+                            <i class="fa fa-circle-o"></i> {{child.displayName}}</a>
                     </li>
                 </ul>
-            </li>
+                <!-- <app-menu-item  [items]="item.children"></app-menu-item> -->
 
+            </li>
         </ul>
     </section>
-
 </aside>

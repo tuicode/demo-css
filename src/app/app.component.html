@@ -1,1 +1,6 @@
-<router-outlet></router-outlet>
+<span  *ngIf="isLoader">
+    <ngl-spinner size="large" type="brand" container="true"></ngl-spinner>
+</span>
+<router-outlet>
+
+</router-outlet>

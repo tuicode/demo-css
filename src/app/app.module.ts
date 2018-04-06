@@ -1,23 +1,28 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { SharedModule } from "./shared/shared.module";
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AccordionModule } from 'primeng/primeng';
 import { PanelModule } from 'primeng/primeng';
 import { ButtonModule } from 'primeng/primeng';
 import { RadioButtonModule } from 'primeng/primeng';
 import { CheckboxModule } from 'primeng/primeng';
 import { PaginatorModule } from 'primeng/primeng';
+import { NglModule } from 'ng-lightning/ng-lightning';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
+import { LoaderService } from './shared/services/loader.service';
+import { LoggerService } from './shared/services/logger.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
+import { NavService } from './core/nav/nav.service';
+
+
 // import { HeaderComponent } from './core/header/header.component';
 import { NavComponent } from './core/nav/nav.component';
 import { FooterComponent } from './core/footer/footer.component';
@@ -29,6 +34,8 @@ import { LoginLayoutComponent } from './core/layouts/login-layout/login-layout.c
 import { HeaderComponent } from './core/header/header.component';
 import { OrderComponent } from './components/order/order.component';
 import { CustomerComponent } from './components/customer/customer.component';
+import { MenuItemComponent } from './core/nav/menu-item/menu-item.component';
+import { LoaderComponent } from './core/loader/loader.component';
 
 
 @NgModule({
@@ -44,13 +51,14 @@ import { CustomerComponent } from './components/customer/customer.component';
     LoginLayoutComponent,
     HeaderComponent,
     OrderComponent,
-    CustomerComponent
+    CustomerComponent,
+    MenuItemComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,    
-    ReactiveFormsModule,
     AppRoutingModule,
+    SharedModule,
     BrowserAnimationsModule,
     AccordionModule,
     PanelModule,
@@ -58,9 +66,10 @@ import { CustomerComponent } from './components/customer/customer.component';
     RadioButtonModule,
     CheckboxModule,
     PaginatorModule,
+    NglModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [AuthGuard, AuthService,
+  providers: [AuthGuard, AuthService, LoaderService, LoggerService, NavService,
     { provide: APP_BASE_HREF, useValue: '/' },
   ],
   bootstrap: [AppComponent]

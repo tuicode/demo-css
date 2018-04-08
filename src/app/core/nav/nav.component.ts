@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavItem } from './../../models/NavItem';
-import { RouterLinkActive } from '@angular/router';
 import { NavService } from './nav.service';
 import { LoaderService } from './../../shared/services/loader.service';
+
 
 @Component({
   selector: 'app-nav',
@@ -15,21 +15,51 @@ export class NavComponent implements OnInit {
 
   constructor(
     private navService: NavService,
-    private loaderServie: LoaderService
+    private loaderService: LoaderService
   ) { }
 
   ngOnInit() {
-    this.loaderServie.displayLoader(true);
-    this.navItems = this.getAllMenu();
-    // this.loaderServie.displayLoader(false);
+    this.loaderService.displayLoader(true);
+    this.getAllMenu();
   }
 
-  // ngAfterViewInit() {
-  //   this.cd.detectChanges();
-  // }
+  getAllMenu(): void {
 
-  getAllMenu() {
+    this.navService.fetchedAllMenu()
+      .subscribe(response => {
+        if (response) {
+          console.log('response ',response);
+          this.navItems = this.list_to_tree(response);
+          this.loaderService.displayLoader(false);
+        }
+      }, error => {
+        console.log(error);
+      });
+  }
 
-    return this.navService.getAllMenu();
+  list_to_tree(list) {
+    var map = {}, node, roots = [], i;
+    for (i = 0; i < list.length; i += 1) {
+      map[list[i].id] = i; // initialize the map
+      list[i].children = []; // initialize the children
+    }
+    for (i = 0; i < list.length; i += 1) {
+      node = list[i];
+      if (node.parentId !== "0") {
+        node.isChild = true;
+        // if you have dangling branches check that map[node.parentId] exists
+        list[map[node.parentId]].children.push(node);
+      } else {
+
+        if (!node.isChild)
+          roots.push(node);
+      }
+    }
+    return roots;
+  }
+
+
+  ngOnDestroy() {
+
   }
 }

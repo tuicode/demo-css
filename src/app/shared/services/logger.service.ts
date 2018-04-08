@@ -5,11 +5,13 @@ export class LoggerService {
 
   constructor() { }
 
-  static log(msg: string): void {
-    console.log(msg);
+  messages: string[] = [];
+
+  add(message: string) {
+    this.messages.push(message);
   }
 
-  static error(msg: string, obj = {}): void {
-    console.error(msg, obj);
+  clear() {
+    this.messages = [];
   }
 }

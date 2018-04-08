@@ -1,55 +1,26 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';;
 import { NavItem } from './../../models/NavItem';
 import { Observable } from 'rxjs/Observable';
+import { AppSetting } from './../../configs/appSetting';
+import { LoggerService } from './../../shared/services/logger.service';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { BaseService } from './../../shared/services/base.service';
+
 
 @Injectable()
-export class NavService {
+export class NavService extends BaseService {
 
-  private navItems: NavItem[] = [];
   constructor(
-
+    private http: HttpClient,
+    private loggerService: LoggerService
   ) {
-
+    super();
   }
 
-  getAllMenu(): any {
+  fetchedAllMenu(): Observable<NavItem[]> {
 
-    this.navItems = [
-      {
-        displayName: 'OMS Menu',
-        iconName: 'close',
-        className: '',
-        children: [
-          {
-            displayName: 'ASN Entry',
-            iconName: 'group',
-            children: [
-              {
-                displayName: 'Level 2',
-                iconName: 'person',
-                route: 'michael-prentice',
-                children: [
-                  {
-                    displayName: 'Level 3',
-                    iconName: 'star_rate',
-                    route: 'material-design',
-                    children: []
-                  }
-                ]
-              },
-
-            ]
-          },
-        ],
-      },
-      {
-        displayName: 'Outbound',
-        iconName: 'close',
-        children: []
-      }
-    ];
-    return this.navItems;
-  }
-
+    return this.http.get<NavItem[]>(AppSetting.API_ENDPOIND + '/Menu')
+      .map(response => { return response; })
+      .catch(this.handleError);
+  }  
 }

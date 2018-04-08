@@ -8,21 +8,12 @@ import { LoaderService } from './shared/services/loader.service';
 })
 export class AppComponent implements OnInit {
   title = 'app';
-  public isLoader: boolean;
-  // @ViewChild('widgetParentDiv') loaderDiv:ElementRef;
 
-  constructor(private loaderService: LoaderService,
-    private cd: ChangeDetectorRef) {
-    this.isLoader = false;
+  constructor() {
+
   }
 
   ngOnInit() {
-    this.loaderService.loaderStatus.subscribe((val: boolean) => {
-      this.isLoader = val;
-    });
-  }
 
-  ngAfterViewChecked() {
-    console.log('ngAfterViewChecked ')
   }
 }

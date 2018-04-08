@@ -1,8 +1,8 @@
 export class NavItem {
-    displayName: string;
-    disabled?: boolean;
-    iconName: string;
-    className?: string;
-    route?: string;
+    id :string;
+    name: string;
+    icon?: string;
+    class?: string;
+    routeLink?: string;
     children?: NavItem[];
 }

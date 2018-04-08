@@ -9,20 +9,26 @@ import { HomeLayoutComponent } from './core/layouts/home-layout/home-layout.comp
 import { LoginLayoutComponent } from './core/layouts/login-layout/login-layout.component';
 import { ContentWrapperComponent } from './core/content-wrapper/content-wrapper.component';
 import { OrderComponent } from './components/order/order.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 const routes: Routes = [
-  
+
   {
     path: '',
     component: HomeLayoutComponent,
     canActivate: [AuthGuard],
-    pathMatch: 'full',
     children: [{
       path: '',
       component: ContentWrapperComponent
     }, {
       path: 'order',
       component: OrderComponent
+    }, {
+      path: 'menu',
+      data: {
+        breadcrumb: 'menu'
+      },
+      component: MenuComponent
     }]
   },
   {
@@ -45,5 +51,10 @@ const routes: Routes = [
     RouterModule
   ],
   declarations: []
+})
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [AppRoutingModule]
 })
 export class AppRoutingModule { }

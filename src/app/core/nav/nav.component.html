@@ -25,11 +25,11 @@
         </form>
 
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview" *ngFor="let item of navItems" >
+            <li class="header">OMS Menu</li>
+            <li class="treeview" *ngFor="let item of navItems">
                 <a routerLink="">
                     <i class="fa fa-dashboard"></i>
-                    <span> {{item.displayName}}</span>
+                    <span> {{item.name}}</span>
                     <span class="pull-right-container" *ngIf="item.children.length >0">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -38,25 +38,33 @@
 
                     <li *ngIf="child.children.length > 0" class="treeview">
                         <a href="#">
-                            <i class="fa fa-circle-o"></i>{{child.displayName}}
+                            <i class="fa fa-circle-o"></i>{{child.name}}
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu" *ngFor="let deepchild of child.children">
-                            <li *ngIf="deepchild.children.length > 0" class="treeview">
+                            <li class="treeview">
                                 <a href="#">
-                                    <i class="fa fa-circle-o"></i> {{deepchild.displayName}}</a>
+                                    <i class="fa fa-circle-o"></i> {{deepchild.name}}</a>
                             </li>
                         </ul>
                     </li>
                     <li *ngIf="child.children.length === 0">
                         <a href="#">
-                            <i class="fa fa-circle-o"></i> {{child.displayName}}</a>
+                            <i class="fa fa-circle-o"></i> {{child.name}}</a>
                     </li>
                 </ul>
-                <!-- <app-menu-item  [items]="item.children"></app-menu-item> -->
 
+            </li>
+        </ul>
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="header">System administration</li>
+            <li class="treeview">
+                <a routerLink='/menu'>
+                    <i class="fa fa-dashboard"></i>
+                    <span>Menu Setup</span>
+                </a>
             </li>
         </ul>
     </section>

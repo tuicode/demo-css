@@ -2,6 +2,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { SharedModule } from "./shared/shared.module";
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
@@ -10,8 +11,7 @@ import { PanelModule } from 'primeng/primeng';
 import { ButtonModule } from 'primeng/primeng';
 import { RadioButtonModule } from 'primeng/primeng';
 import { CheckboxModule } from 'primeng/primeng';
-import { PaginatorModule } from 'primeng/primeng';
-import { NglModule } from 'ng-lightning/ng-lightning';
+import { PaginatorModule, DataTableModule } from 'primeng/primeng';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -21,7 +21,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { NavService } from './core/nav/nav.service';
-
+import { MenuService } from './components/menu/services/menu.service';
 
 // import { HeaderComponent } from './core/header/header.component';
 import { NavComponent } from './core/nav/nav.component';
@@ -36,6 +36,8 @@ import { OrderComponent } from './components/order/order.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { MenuItemComponent } from './core/nav/menu-item/menu-item.component';
 import { LoaderComponent } from './core/loader/loader.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { BreadCrumbComponent } from './core/bread-crumb/bread-crumb.component';
 
 
 @NgModule({
@@ -53,11 +55,14 @@ import { LoaderComponent } from './core/loader/loader.component';
     OrderComponent,
     CustomerComponent,
     MenuItemComponent,
-    LoaderComponent
+    LoaderComponent,
+    MenuComponent,
+    BreadCrumbComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     SharedModule,
     BrowserAnimationsModule,
     AccordionModule,
@@ -66,10 +71,10 @@ import { LoaderComponent } from './core/loader/loader.component';
     RadioButtonModule,
     CheckboxModule,
     PaginatorModule,
-    NglModule,
+    DataTableModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [AuthGuard, AuthService, LoaderService, LoggerService, NavService,
+  providers: [AuthGuard, AuthService, LoaderService, LoggerService, NavService, MenuService,
     { provide: APP_BASE_HREF, useValue: '/' },
   ],
   bootstrap: [AppComponent]

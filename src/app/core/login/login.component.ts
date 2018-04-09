@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   public user: User = new User();
   public isCustomerLogo = false;
-
+  public isError = false;
   constructor(
     private authService: AuthService,
     private loaderService: LoaderService,
@@ -39,6 +39,9 @@ export class LoginComponent implements OnInit {
             if (result) {
               localStorage.setItem('currentUser', JSON.stringify(result));
               this.router.navigate(['/']);
+            }
+            else{
+              this.isError = true;
             }
             this.loaderService.displayLoader(false);
           }

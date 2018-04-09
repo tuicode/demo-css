@@ -22,7 +22,7 @@
 
     <form class="login-form" #frmuser="ngForm" (ngSubmit)="onSubmit(frmuser)">
       <h3 class="login-logo"></h3>
-      <span class="validation-msg error hide">Sorry, you have entered an invalid User ID.</span>
+      <span class="validation-msg error hide" *ngIf="isError">Sorry, you have entered an invalid User ID.</span>
       <div class="form-group">
         <label for="username" class="form-control-label" style="font-weight: 100">User ID</label>
         <input name="username" type="text" class="form-control1" #username="ngModel" [(ngModel)]="user.username" required>

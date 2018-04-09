@@ -21,6 +21,7 @@ describe('LoginComponent', () => {
   let submitElement: DebugElement;
   let usernameElement: DebugElement;
   let passwordElement: DebugElement;
+  let errorMessageElement: DebugElement;
   let authService: AuthService;
   let componentService: AuthService;
 
@@ -43,6 +44,7 @@ describe('LoginComponent', () => {
     usernameElement = fixture.debugElement.query(By.css('input[type=text]'));
     passwordElement = fixture.debugElement.query(By.css('input[type=password]'));
     componentService = fixture.debugElement.injector.get(AuthService);
+
   });
 
   it('should create component', () => {
@@ -63,6 +65,18 @@ describe('LoginComponent', () => {
     componentService.fetchedUser().subscribe(reponse => {
       expect(reponse.length > 0);
     })
+  })
+
+  it('should show error message ', () => {
+    fixture.detectChanges();
+    // click button login 
+    submitElement.triggerEventHandler('click', null);
+    // mock value
+    component.isError = true;
+    errorMessageElement = fixture.debugElement.query(By.css('.validation-msg'));
+    let errorEle = errorMessageElement.nativeElement;
+    console.log('errorEle ==========>', errorEle);
+    expect(errorEle.textContent).toContain('Sorry, you have entered an invalid User ID.');
   })
 
 });

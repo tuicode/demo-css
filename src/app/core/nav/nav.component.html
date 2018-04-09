@@ -34,9 +34,9 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
                 </a>
-                <ul class="treeview-menu" *ngFor="let child of item.children">
+                <ul class="treeview-menu" >
 
-                    <li *ngIf="child.children.length > 0" class="treeview">
+                    <li  class="treeview" *ngFor="let child of item.children">
                         <a href="#">
                             <i class="fa fa-circle-o"></i>{{child.name}}
                             <span class="pull-right-container">
@@ -50,10 +50,14 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <!-- <li *ngIf="child.children.length === 0">
                         <a href="#">
                             <i class="fa fa-circle-o"></i> {{child.name}}</a>
-                    </li>
+                    </li> -->
+                    <!-- <li>
+                        <a href="#">
+                            <i class="fa fa-circle-o"></i> {{child.name}}</a>
+                    </li> -->
                 </ul>
 
             </li>

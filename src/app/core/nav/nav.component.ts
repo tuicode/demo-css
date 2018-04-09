@@ -28,9 +28,7 @@ export class NavComponent implements OnInit {
     this.navService.fetchedAllMenu()
       .subscribe(response => {
         if (response) {
-          console.log('response ', response);
           this.navItems = this.list_to_tree(response);
-          debugger;
           console.log('this.navItems ', this.navItems);
           this.loaderService.displayLoader(false);
         }

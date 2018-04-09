@@ -35,12 +35,11 @@ export class LoginComponent implements OnInit {
             var users = response;
             console.log('user :', users);
             var result = this.findUser(users, this.user);
-
             if (result) {
               localStorage.setItem('currentUser', JSON.stringify(result));
               this.router.navigate(['/']);
             }
-            else{
+            else {
               this.isError = true;
             }
             this.loaderService.displayLoader(false);

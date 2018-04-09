@@ -63,8 +63,8 @@ import { NotfoundComponent } from './core/notfound/notfound.component';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     AppRoutingModule,
+    HttpClientModule,
     SharedModule,
     BrowserAnimationsModule,
     AccordionModule,

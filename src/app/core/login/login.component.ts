@@ -26,15 +26,16 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(frmuser: NgForm) {
-    if (frmuser.valid) {
+  login(username, password): void {
+   
+    if (username && password) {
       this.loaderService.displayLoader(true);
       this.authService.fetchedUser().subscribe(
         response => {
           if (response) {
             var users = response;
             console.log('user :', users);
-            var result = this.findUser(users, this.user);
+            var result = this.findUser(users, username, password);
             if (result) {
               localStorage.setItem('currentUser', JSON.stringify(result));
               this.router.navigate(['/']);
@@ -50,13 +51,12 @@ export class LoginComponent implements OnInit {
         }
       )
     }
-
   }
 
 
-  findUser(adminUsers: AdminUser[], term: User): AdminUser {
+  findUser(adminUsers: AdminUser[], username, password): AdminUser {
     var result = _.find(adminUsers, function (item) {
-      if (item.name === term.username && item.password === term.password) {
+      if (item.name === username && item.password === password) {
         return item;
       }
     })

@@ -38,6 +38,7 @@ import { MenuItemComponent } from './core/nav/menu-item/menu-item.component';
 import { LoaderComponent } from './core/loader/loader.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { BreadCrumbComponent } from './core/bread-crumb/bread-crumb.component';
+import { NotfoundComponent } from './core/notfound/notfound.component';
 
 
 @NgModule({
@@ -57,12 +58,13 @@ import { BreadCrumbComponent } from './core/bread-crumb/bread-crumb.component';
     MenuItemComponent,
     LoaderComponent,
     MenuComponent,
-    BreadCrumbComponent
+    BreadCrumbComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
+    AppRoutingModule,
     SharedModule,
     BrowserAnimationsModule,
     AccordionModule,

@@ -28,8 +28,10 @@ export class NavComponent implements OnInit {
     this.navService.fetchedAllMenu()
       .subscribe(response => {
         if (response) {
-          console.log('response ',response);
+          console.log('response ', response);
           this.navItems = this.list_to_tree(response);
+          debugger;
+          console.log('this.navItems ', this.navItems);
           this.loaderService.displayLoader(false);
         }
       }, error => {
@@ -38,6 +40,7 @@ export class NavComponent implements OnInit {
   }
 
   list_to_tree(list) {
+
     var map = {}, node, roots = [], i;
     for (i = 0; i < list.length; i += 1) {
       map[list[i].id] = i; // initialize the map
@@ -46,6 +49,7 @@ export class NavComponent implements OnInit {
     for (i = 0; i < list.length; i += 1) {
       node = list[i];
       if (node.parentId !== "0") {
+
         node.isChild = true;
         // if you have dangling branches check that map[node.parentId] exists
         list[map[node.parentId]].children.push(node);

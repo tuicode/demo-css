@@ -1,10 +1,10 @@
 
-/deep/.ui-datatable tbody > tr.ui-widget-content.ui-state-highlight {
+:host /deep/.ui-datatable tbody > tr.ui-widget-content.ui-state-highlight {
     background-color:green !important;
     color: #fff;
 }
 
-/deep/ .ui-datatable .ui-paginator a{
+:host /deep/ .ui-datatable .ui-paginator a{
     display: none;
 }
 
@@ -17,6 +17,6 @@
     margin: 10px 0 10px 0;
 }
 
-/deep/ .chkbox-center{
+:host /deep/ .chkbox-center{
     text-align: center !important;
 }

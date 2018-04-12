@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Role } from './../models/role';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Observable';
 import { AppSetting } from './../../../configs/appSetting';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BaseService } from './../../../shared/services/base.service';

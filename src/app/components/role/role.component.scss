@@ -1,0 +1,22 @@
+
+/deep/.ui-datatable tbody > tr.ui-widget-content.ui-state-highlight {
+    background-color:green !important;
+    color: #fff;
+}
+
+/deep/ .ui-datatable .ui-paginator a{
+    display: none;
+}
+
+.footer-dropdown{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.btn-add{
+    margin: 10px 0 10px 0;
+}
+
+/deep/ .chkbox-center{
+    text-align: center !important;
+}

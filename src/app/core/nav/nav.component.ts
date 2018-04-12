@@ -28,38 +28,15 @@ export class NavComponent implements OnInit {
     this.navService.fetchedAllMenu()
       .subscribe(response => {
         if (response) {
-          this.navItems = this.list_to_tree(response);
-          console.log('this.navItems ', this.navItems);
+          this.navItems = response;
           this.loaderService.displayLoader(false);
         }
       }, error => {
+
         console.log(error);
+        throw error;
       });
   }
-
-  list_to_tree(list) {
-
-    var map = {}, node, roots = [], i;
-    for (i = 0; i < list.length; i += 1) {
-      map[list[i].id] = i; // initialize the map
-      list[i].children = []; // initialize the children
-    }
-    for (i = 0; i < list.length; i += 1) {
-      node = list[i];
-      if (node.parentId !== "0") {
-
-        node.isChild = true;
-        // if you have dangling branches check that map[node.parentId] exists
-        list[map[node.parentId]].children.push(node);
-      } else {
-
-        if (!node.isChild)
-          roots.push(node);
-      }
-    }
-    return roots;
-  }
-
 
   ngOnDestroy() {
 

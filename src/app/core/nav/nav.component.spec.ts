@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, getTestBed, inject } from '@angular/core/testing';
+import { async, fakeAsync, ComponentFixture, TestBed, getTestBed, inject } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { NavService } from './nav.service';
 import { LoggerService } from './../../shared/services/logger.service';
@@ -7,10 +7,15 @@ import { NavComponent } from './nav.component';
 import { NavItem } from './../../models/NavItem';
 import { DebugElement, Component } from '@angular/core';
 import { By } from "@angular/platform-browser";
+import { Observable } from 'rxjs/Observable';
 
-class MockNavService extends NavService {
-  fetchedAllMenu() {
-    return null;
+class MockNavService {
+
+  fetchedAllMenu(): Observable<NavItem[]> {
+    var dumData = [
+      { id: "1", name: 'tes1', icon: "0", children: [] },
+      { id: "2", name: 'tes2', icon: "1", children: [] }]
+    return Observable.of(dumData);
   }
 }
 
@@ -20,21 +25,25 @@ describe('NavComponent', () => {
   let fixture: ComponentFixture<NavComponent>;
   let navService: NavService;
   let testBedService: NavService;
-  let componentService: NavService;
+  //let componentService: NavService;
   let menuElement: DebugElement;
+  let mockService: MockNavService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NavComponent],
       imports: [HttpClientTestingModule],
-      providers: [NavService, LoggerService, LoaderService]
+      providers: [NavService, LoggerService, LoaderService
+      ]
     });
 
-    // Configure the component with another set of Providers
-    TestBed.overrideComponent(
-      NavComponent,
-      { set: { providers: [{ provide: NavService, useClass: MockNavService }] } }
-    );
+
+    //Configure the component with another set of Providers
+    // tall angular thet should use MocNavService
+    // TestBed.overrideComponent(
+    //   NavComponent,
+    //   { set: { providers: [{ provide: NavService, useClass: MockNavService }] } }
+    // );
 
     // create component and test fixture
     fixture = TestBed.createComponent(NavComponent);
@@ -44,7 +53,8 @@ describe('NavComponent', () => {
     testBedService = TestBed.get(NavService);
 
     // AuthService provided by Component, (should return MockAuthService)
-    componentService = fixture.debugElement.injector.get(NavService);
+    //componentService = fixture.debugElement.injector.get(NavService);
+    mockService = fixture.debugElement.injector.get(NavService);
   });
 
   it('should create component', () => {
@@ -63,4 +73,17 @@ describe('NavComponent', () => {
     expect(menuElement.nativeElement).toBeFalsy();
   });
 
+  it('should call fetchedAllMenu api', fakeAsync(() => {
+    var testData = [
+      { id: "1", name: 'tes1', icon: "0", children: [] },
+      { id: "2", name: 'tes2', icon: "1", children: [] }]
+    const spy = spyOn(mockService, 'fetchedAllMenu').and.returnValue(
+      Observable.of(testData)
+    );
+    component.ngOnInit();
+    fixture.detectChanges();
+    console.log('component.navItems ', component.navItems);
+    expect(component.navItems).toEqual(testData);
+    expect(spy.calls.any()).toEqual(true);
+  }))
 });

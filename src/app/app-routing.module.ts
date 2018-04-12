@@ -10,6 +10,8 @@ import { LoginLayoutComponent } from './core/layouts/login-layout/login-layout.c
 import { ContentWrapperComponent } from './core/content-wrapper/content-wrapper.component';
 import { OrderComponent } from './components/order/order.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { ErrorsComponent } from './core/errors/errors.component';
+import { RoleComponent } from './components/role/role.component';
 
 const routes: Routes = [
 
@@ -20,9 +22,18 @@ const routes: Routes = [
     children: [{
       path: '',
       component: ContentWrapperComponent
-    }, {
+    },
+    {
       path: 'order',
       component: OrderComponent
+    },
+    {
+      path: 'roles',
+      component: RoleComponent
+    },
+    {
+      path: 'error',
+      component: ErrorsComponent
     }, {
       path: 'menu',
       data: {

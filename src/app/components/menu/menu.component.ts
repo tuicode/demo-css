@@ -28,7 +28,7 @@ export class MenuComponent implements OnInit {
         this.loaderService.displayLoader(false);
       }
     }, error => {
-      console.log(error);
+     throw error;
     })
   }
 }

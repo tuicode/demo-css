@@ -20,7 +20,7 @@ import { CheckboxModule } from 'primeng/primeng';
 import { PaginatorModule, DataTableModule } from 'primeng/primeng';
 import { MessageModule } from 'primeng/message';
 import { DropdownModule } from 'primeng/dropdown';
-
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LoaderService } from './shared/services/loader.service';
@@ -92,6 +92,7 @@ import { RoleComponent } from './components/role/role.component';
     CheckboxModule,
     PaginatorModule,
     DataTableModule,
+    BreadcrumbModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [AuthGuard, AuthService, LoaderService, LoggerService, NavService, MenuService, ErrorsService,

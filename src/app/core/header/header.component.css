@@ -1,0 +1,16 @@
+.logo-small-responsive {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    padding: 10px;
+}
+
+
+.logo-responsive {
+    max-width: 100%;
+    width: 150px;
+    height: 45;
+    padding-bottom: 4px;
+}
+
+

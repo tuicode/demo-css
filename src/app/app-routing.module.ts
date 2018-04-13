@@ -19,14 +19,16 @@ const routes: Routes = [
     path: '',
     component: HomeLayoutComponent,
     canActivate: [AuthGuard],
+
     children: [{
       path: '',
+
       component: ContentWrapperComponent
     },
     {
       path: 'roles',
       data: {
-        breadcrumb: 'Roles'
+        breadcrumb: 'System admistration > roles'
       },
       component: RoleComponent
     },

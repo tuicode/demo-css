@@ -4,7 +4,7 @@
   </div>
   <p-dataTable #dt [value]="roles" selectionMode="single" [rows]="10" [paginator]="false" (onRowSelect)="onRowSelect($event)"
     [responsive]="true">
-    <p-column header="#">
+    <p-column header="#" styleClass="action-with">
       <ng-template let-role="rowData" pTemplate="body">
         <a style="text-decoration: underline" (click)="edit(role)">Edit</a>
       </ng-template>

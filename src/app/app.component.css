@@ -126,5 +126,7 @@
     }
   }
 
-
- 
+   
+:host {
+  display: block;
+}

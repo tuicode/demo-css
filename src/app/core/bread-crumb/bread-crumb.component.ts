@@ -13,6 +13,7 @@ interface IBreadcrumb {
   selector: 'app-bread-crumb',
   templateUrl: './bread-crumb.component.html',
   styleUrls: ['./bread-crumb.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 
 })
 export class BreadCrumbComponent implements OnInit {

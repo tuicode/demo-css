@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router, PRIMARY_OUTLET ,Params} from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, PRIMARY_OUTLET, Params } from '@angular/router';
 import { BreadCrumb } from './../bread-crumb/models/breadcrumb.class';
 import "rxjs/add/operator/filter";
 
@@ -12,7 +12,7 @@ interface IBreadcrumb {
 @Component({
   selector: 'app-bread-crumb',
   templateUrl: './bread-crumb.component.html',
-  styleUrls: ['./bread-crumb.component.css'],
+  styleUrls: ['./bread-crumb.component.scss'],
 
 })
 export class BreadCrumbComponent implements OnInit {
@@ -30,22 +30,25 @@ export class BreadCrumbComponent implements OnInit {
     private router: Router
   ) {
     this.breadcrumbs = [];
-   }
+  }
 
   ngOnInit() {
+   
     const ROUTE_DATA_BREADCRUMB: string = "breadcrumb";
     //subscribe to the NavigationEnd event
     this.router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
-      
+    
       //set breadcrumbs
       let root: ActivatedRoute = this.activatedRoute.root;
+      console.log('root ', root);
       this.breadcrumbs = this.getBreadcrumbs(root);
     });
   }
 
-  private getBreadcrumbs(route: ActivatedRoute, url: string="", breadcrumbs: IBreadcrumb[]=[]): IBreadcrumb[] {
+  private getBreadcrumbs(route: ActivatedRoute, url: string = "", breadcrumbs: IBreadcrumb[] = []): IBreadcrumb[] {
     const ROUTE_DATA_BREADCRUMB: string = "breadcrumb";
 
+    console.log('ActivatedRoute ', ActivatedRoute);
     //get the child routes
     let children: ActivatedRoute[] = route.children;
 
@@ -79,11 +82,12 @@ export class BreadCrumbComponent implements OnInit {
         url: url
       };
       breadcrumbs.push(breadcrumb);
-      
+      console.log('params ========== ', child.snapshot.params);
+      console.log('label ', child.snapshot.data);
       //recursive
       return this.getBreadcrumbs(child, url, breadcrumbs);
     }
-    
+
     //we should never get here, but just in case
     return breadcrumbs;
   }

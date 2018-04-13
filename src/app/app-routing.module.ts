@@ -24,11 +24,10 @@ const routes: Routes = [
       component: ContentWrapperComponent
     },
     {
-      path: 'order',
-      component: OrderComponent
-    },
-    {
       path: 'roles',
+      data: {
+        breadcrumb: 'Roles'
+      },
       component: RoleComponent
     },
     {

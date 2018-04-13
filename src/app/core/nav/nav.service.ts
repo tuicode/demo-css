@@ -48,5 +48,4 @@ export class NavService extends BaseService {
     return roots;
   }
 
-
 }

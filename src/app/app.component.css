@@ -125,3 +125,9 @@
       transform: rotate(360deg);
     }
   }
+
+
+  :host {
+    display: block;
+  }
+  

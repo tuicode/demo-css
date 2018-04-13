@@ -29,14 +29,14 @@ export class RoleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAllRole(AppSetting.DEFAULT_ROW_PERPAGE.toString());
+    this.getAllRole();
   }
 
-  getAllRole(row?: string): void {
+  getAllRole(rowNumber?: string): void {
     this.loaderService.displayLoader(true);
     this.roleService.fetchedAllRole().subscribe(response => {
       if (response) {
-        this.roles = row === 'All' ? response : this.paging(response, row);
+        this.roles = rowNumber === 'All' ? response : this.paging(response, rowNumber);
         this.loaderService.displayLoader(false);
       }
     }, error => {
@@ -45,11 +45,11 @@ export class RoleComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    console.log('event data =======>', event.data)
+    //console.log('event data =======>', event.data)
   }
 
   edit(row) {
-    console.log('row ========>', row);
+    // console.log('row ========>', row);
   }
 
   onShowRowPerPageChange(event) {
@@ -62,9 +62,9 @@ export class RoleComponent implements OnInit {
       num = parseInt(rowNumber);
     }
     const totalRow = datas.length;
-    console.log('totalRow ', totalRow);
-    console.log('num ', num);
-    console.log('data', datas);
+    // console.log('totalRow ', totalRow);
+    // console.log('num ', num);
+    // console.log('data', datas);
     return datas.splice(0, totalRow <= num ? totalRow : num)
   }
 

@@ -1,7 +1,11 @@
+<h1>
+  Dashboard
+  <!-- <small>Version 2.0</small> -->
+</h1>
 <ol class="breadcrumb">
   <li *ngFor="let breadcrumb of breadcrumbs">
     <a [routerLink]="[breadcrumb.url, breadcrumb.params]">
-      <i class="fa fa-dashboard"></i> {{ breadcrumb.label }}</a>
+      <i class="fa fa-dashboard"></i> > {{ breadcrumb.label }}</a>
   </li>
-  <li class="active">Dashboard</li>
+  <!-- <li class="active">Dashboard</li> -->
 </ol>

@@ -13,7 +13,7 @@
     <p-column field="description" header="Description"></p-column>
     <p-column field="active" header="Active" styleClass="chkbox-center">
       <ng-template let-role="rowData" pTemplate="body">
-        <p-checkbox binary="true" [(ngModel)]="role.active"></p-checkbox>
+        <p-checkbox disabled="true" binary="true" [(ngModel)]="role.active"></p-checkbox>
 
       </ng-template>
     </p-column>

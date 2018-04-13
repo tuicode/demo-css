@@ -36,7 +36,7 @@ const routes: Routes = [
       path: 'error',
       component: ErrorsComponent
     }, {
-      path: 'menu',
+      path: 'System admistration > menu',
       data: {
         breadcrumb: 'menu'
       },

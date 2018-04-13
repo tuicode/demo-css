@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { RoleService } from './services/role.service';
 import { Role } from './models/role';
 import { LoaderService } from './../../shared/services/loader.service';
@@ -17,14 +17,14 @@ export class RoleComponent implements OnInit {
 
   public roles: Role[] = [];
   public rowPerPage;
-
-
+  public title: string = 'Roles';
+  @Output() changeTitle: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
     private loaderService: LoaderService,
     private roleService: RoleService
   ) {
-
+    this.changeTitle.emit(this.title);
     this.rowPerPage = AppSetting.DEDAULT_ROW_NUMBER;
   }
 

@@ -26,7 +26,7 @@
             <li class="header">OMS Menu</li>
             <li class="treeview" *ngFor="let item of navItems">
                 <a>
-                    <i class="fa fa-dashboard"></i>
+                    <i class="fa fa-folder"></i>
                     <span> {{item.name}}</span>
                     <span class="pull-right-container" *ngIf="item.children.length >0">
                         <i class="fa fa-angle-left pull-right"></i>
@@ -64,25 +64,25 @@
             <li class="header">System administration</li>
             <li class="treeview">
                 <a routerLink='/users'>
-                    <i class="fa fa-dashboard"></i>
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
                     <span>Users</span>
                 </a>
             </li>
             <li class="treeview">
                 <a routerLink='/profiles'>
-                    <i class="fa fa-dashboard"></i>
+                    <i class="fa fa-hand-o-right" aria-hidden="true"></i>
                     <span>Profiles</span>
                 </a>
             </li>
             <li class="treeview">
                 <a routerLink='/roles'>
-                    <i class="fa fa-dashboard"></i>
+                    <i class="fa fa-life-ring"></i>
                     <span>Roles</span>
                 </a>
             </li>
             <li class="treeview">
                 <a routerLink='/menu'>
-                    <i class="fa fa-dashboard"></i>
+                    <i class="fa fa-sitemap" aria-hidden="true"></i>
                     <span>Menus</span>
                 </a>
             </li>

@@ -9,16 +9,16 @@
         <a style="text-decoration: underline" (click)="edit(role)">Edit</a>
       </ng-template>
     </p-column>
-    <p-column field="roleid" header="Role ID"></p-column>
-    <p-column field="description" header="Description"></p-column>
-    <p-column field="active" header="Active" styleClass="chkbox-center">
+    <p-column field="roleid" header="Role ID" [filter]="true"></p-column>
+    <p-column field="description" header="Description" [filter]="true"></p-column>
+    <p-column field="active" header="Active" styleClass="chkbox-center" [filter]="true">
       <ng-template let-role="rowData" pTemplate="body">
         <p-checkbox disabled="true" binary="true" [(ngModel)]="role.active"></p-checkbox>
 
       </ng-template>
     </p-column>
-    <p-column field="lastmodifiedby" header="Last Modified By"> </p-column>
-    <p-column header="Last Modified Date">
+    <p-column field="lastmodifiedby" header="Last Modified By" [filter]="true"> </p-column>
+    <p-column header="Last Modified Date" [filter]="true">
       <ng-template let-role="rowData" pTemplate="body">
         {{role.lastmodifieddate | date:'dd/MM/yyyy hh:MM:ss'}}
       </ng-template>

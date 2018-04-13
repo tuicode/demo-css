@@ -26,6 +26,7 @@ export class BreadCrumbComponent implements OnInit {
 
   public breadcrumbs: IBreadcrumb[];
 
+  public title: string = 'Home';
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router
@@ -34,11 +35,11 @@ export class BreadCrumbComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+
     const ROUTE_DATA_BREADCRUMB: string = "breadcrumb";
     //subscribe to the NavigationEnd event
     this.router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
-    
+
       //set breadcrumbs
       let root: ActivatedRoute = this.activatedRoute.root;
       console.log('root ', root);
@@ -91,6 +92,12 @@ export class BreadCrumbComponent implements OnInit {
 
     //we should never get here, but just in case
     return breadcrumbs;
+  }
+
+  getTitle(event: string): void {
+    debugger;
+    alert(event)
+    // this.title = event
   }
 
 }

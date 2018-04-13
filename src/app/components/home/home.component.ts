@@ -7,12 +7,12 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  @Output() changeTitle: EventEmitter<string> = new EventEmitter<string>();
+  @Output('title') changeTitle: EventEmitter<string> = new EventEmitter<string>();
   public title: string = 'Home';
   constructor() { }
 
   ngOnInit() {
-   
     this.changeTitle.emit(this.title);
   }
+
 }

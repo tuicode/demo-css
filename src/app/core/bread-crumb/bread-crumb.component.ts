@@ -93,11 +93,4 @@ export class BreadCrumbComponent implements OnInit {
     //we should never get here, but just in case
     return breadcrumbs;
   }
-
-  getTitle(event: string): void {
-    debugger;
-    alert(event)
-    // this.title = event
-  }
-
 }

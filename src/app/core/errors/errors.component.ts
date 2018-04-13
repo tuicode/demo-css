@@ -22,8 +22,8 @@ export class ErrorsComponent implements OnInit {
     this.data = this.activatedRoute.snapshot.data;
     console.log('this.routeParams ', this.routeParams);
     console.log('this.data ', this.data);
-    this.msgs = [];
-    this.msgs.push({ severity: 'error', summary: 'title message', detail: message });
-    console.log('msgs  ', this.msgs)
+    // this.msgs = [];
+    // this.msgs.push({ severity: 'error', summary: 'title message', detail: message });
+    // console.log('msgs  ', this.msgs)
   }
 }

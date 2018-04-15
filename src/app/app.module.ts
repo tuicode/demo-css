@@ -32,6 +32,7 @@ import { NavService } from './core/nav/nav.service';
 import { MenuService } from './components/menu/services/menu.service';
 import { ErrorsService } from './errors.service';
 import { RoleService } from './components/role/services/role.service';
+import { AppService } from './app.service';
 // import { HeaderComponent } from './core/header/header.component';
 
 import { NavComponent } from './core/nav/nav.component';
@@ -96,6 +97,7 @@ import { RoleComponent } from './components/role/role.component';
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [AuthGuard, AuthService, LoaderService, LoggerService, NavService, MenuService, ErrorsService,
+    AppService,
     RoleService,
     { provide: APP_BASE_HREF, useValue: '/' },
     { provide: ErrorHandler, useClass: ErrorsHandle }

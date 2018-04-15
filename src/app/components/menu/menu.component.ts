@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Menu } from './models/menu.class';
 import { MenuService } from './services/menu.service';
 import { LoaderService } from './../../shared/services/loader.service';
+import { AppService } from './../../app.service';
 
 @Component({
   selector: 'app-menu',
@@ -11,10 +12,14 @@ import { LoaderService } from './../../shared/services/loader.service';
 export class MenuComponent implements OnInit {
 
   public menus: Menu[] = [];
+  public pageTitle = 'Menus'
   constructor(
     private menuService: MenuService,
-    private loaderService: LoaderService
-  ) { }
+    private loaderService: LoaderService,
+    private appService: AppService
+  ) {
+    this.appService.childSayPageTitle(this.pageTitle);
+  }
 
   ngOnInit() {
     this.loaderService.displayLoader(true);
@@ -28,7 +33,7 @@ export class MenuComponent implements OnInit {
         this.loaderService.displayLoader(false);
       }
     }, error => {
-     throw error;
+      throw error;
     })
   }
 }

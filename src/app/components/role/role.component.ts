@@ -5,6 +5,7 @@ import { LoaderService } from './../../shared/services/loader.service';
 import { SelectItem } from 'primeng/api';
 import { DropDownOption } from './../../shared/models/dropdown-option';
 import { AppSetting } from './../../configs/appSetting';
+import { AppService } from './../../app.service';
 
 @Component({
   selector: 'app-role',
@@ -17,18 +18,20 @@ export class RoleComponent implements OnInit {
 
   public roles: Role[] = [];
   public rowPerPage;
-  public title: string = 'Roles';
-  @Output() changeTitle: EventEmitter<string> = new EventEmitter<string>();
+  public pageTitle: string = 'Roles';
 
   constructor(
     private loaderService: LoaderService,
-    private roleService: RoleService
+    private roleService: RoleService,
+    private appService: AppService,
   ) {
-    this.changeTitle.emit(this.title);
+
+    this.appService.childSayPageTitle(this.pageTitle);
     this.rowPerPage = AppSetting.DEDAULT_ROW_NUMBER;
   }
 
   ngOnInit() {
+    // this.changeTitle.emit(this.pageTitle);
     this.getAllRole();
   }
 

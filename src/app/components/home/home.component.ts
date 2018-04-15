@@ -1,4 +1,5 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild } from '@angular/core';
+import { AppService } from './../../app.service';
 
 @Component({
   selector: 'app-home',
@@ -7,12 +8,22 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  @Output('title') changeTitle: EventEmitter<string> = new EventEmitter<string>();
+  //@Output('title') changeTitle: EventEmitter<string> = new EventEmitter<string>();
   public title: string = 'Home';
-  constructor() { }
+  constructor(
+    private appService: AppService
+  ) { }
 
   ngOnInit() {
-    this.changeTitle.emit(this.title);
+    this.appService.childSaidPageTitle$.subscribe(mess => {
+      console.log('mess ', mess);
+      this.title = mess;
+    })
   }
 
+  getPageTitle(value) {
+
+    console.log('value============>', value);
+    //this.title = value;
+  }
 }

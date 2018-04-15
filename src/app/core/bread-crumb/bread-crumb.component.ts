@@ -42,7 +42,7 @@ export class BreadCrumbComponent implements OnInit {
 
       //set breadcrumbs
       let root: ActivatedRoute = this.activatedRoute.root;
-      console.log('root ', root);
+      //  console.log('root ', root);
       this.breadcrumbs = this.getBreadcrumbs(root);
     });
   }
@@ -50,7 +50,7 @@ export class BreadCrumbComponent implements OnInit {
   private getBreadcrumbs(route: ActivatedRoute, url: string = "", breadcrumbs: IBreadcrumb[] = []): IBreadcrumb[] {
     const ROUTE_DATA_BREADCRUMB: string = "breadcrumb";
 
-    console.log('ActivatedRoute ', ActivatedRoute);
+    //console.log('ActivatedRoute ', ActivatedRoute);
     //get the child routes
     let children: ActivatedRoute[] = route.children;
 
@@ -84,8 +84,8 @@ export class BreadCrumbComponent implements OnInit {
         url: url
       };
       breadcrumbs.push(breadcrumb);
-      console.log('params ========== ', child.snapshot.params);
-      console.log('label ', child.snapshot.data);
+      // console.log('params ========== ', child.snapshot.params);
+      // console.log('label ', child.snapshot.data);
       //recursive
       return this.getBreadcrumbs(child, url, breadcrumbs);
     }

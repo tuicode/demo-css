@@ -18,6 +18,9 @@ import { ButtonModule } from 'primeng/primeng';
 import { RadioButtonModule } from 'primeng/primeng';
 import { CheckboxModule } from 'primeng/primeng';
 import { PaginatorModule, DataTableModule } from 'primeng/primeng';
+import { IFLDataTableModule } from './../../src/app/ui/customizedComponents/ifl-datatable/ifl-datatable.module';
+import { IFLSharedModule } from './../../src/app/ui/customizedComponents/shared/shared.module';
+
 import { MessageModule } from 'primeng/message';
 import { DropdownModule } from 'primeng/dropdown';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
@@ -53,9 +56,6 @@ import { NotfoundComponent } from './core/notfound/notfound.component';
 import { ErrorsComponent } from './core/errors/errors.component';
 import { RoleComponent } from './components/role/role.component';
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +76,7 @@ import { RoleComponent } from './components/role/role.component';
     BreadCrumbComponent,
     NotfoundComponent,
     ErrorsComponent,
-    RoleComponent
+    RoleComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,7 +94,9 @@ import { RoleComponent } from './components/role/role.component';
     PaginatorModule,
     DataTableModule,
     BreadcrumbModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    IFLSharedModule,
+    IFLDataTableModule,
+    //ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [AuthGuard, AuthService, LoaderService, LoggerService, NavService, MenuService, ErrorsService,
     AppService,

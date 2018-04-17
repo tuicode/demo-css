@@ -1,33 +1,29 @@
-<div>
-  <div class="btn-add">
-    <button pButton type="button" label="New Role" class="ui-button-success"></button>
-  </div>
-  <p-dataTable #dt [value]="roles" selectionMode="single" [rows]="10" [paginator]="false" (onRowSelect)="onRowSelect($event)"
-    [responsive]="true">
-    <p-column header="#" styleClass="action-with">
-      <ng-template let-role="rowData" pTemplate="body">
-        <a style="text-decoration: underline" (click)="edit(role)">Edit</a>
-      </ng-template>
-    </p-column>
-    <p-column field="roleid" header="Role ID" [filter]="true"></p-column>
-    <p-column field="description" header="Description" [filter]="true"></p-column>
-    <p-column field="active" header="Active" styleClass="chkbox-center" [filter]="true">
-      <ng-template let-role="rowData" pTemplate="body">
-        <p-checkbox disabled="true" binary="true" [(ngModel)]="role.active"></p-checkbox>
+<ifl-dataTable [value]="roles" (onRowSelect)="onRowSelect($event)">
 
-      </ng-template>
-    </p-column>
-    <p-column field="lastmodifiedby" header="Last Modified By" [filter]="true"> </p-column>
-    <p-column header="Last Modified Date" [filter]="true">
-      <ng-template let-role="rowData" pTemplate="body">
-        {{role.lastmodifieddate | date:'dd/MM/yyyy hh:MM:ss'}}
-      </ng-template>
-    </p-column>
-    <p-footer class="footer-dropdown">
-      <div>
-        Show
-        <p-dropdown #dd [options]="rowPerPage" (onChange)="onShowRowPerPageChange($event.value)"></p-dropdown> Rows
-      </div>
-    </p-footer>
-  </p-dataTable>
-</div>
+  <p-column header="#" styleClass="action-with">
+    <ng-template let-role="rowData" pTemplate="body">
+      <a style="text-decoration: underline" (click)="edit(role)">Edit</a>
+    </ng-template>
+  </p-column>
+  <p-column field="roleid" header="Role ID" [filter]="true"></p-column>
+  <p-column field="description" header="Description" [filter]="true"></p-column>
+  <p-column field="active" header="Active" styleClass="chkbox-center" [filter]="true">
+    <ng-template let-role="rowData" pTemplate="body">
+      <p-checkbox disabled="true" binary="true" [(ngModel)]="role.active"></p-checkbox>
+    </ng-template>
+  </p-column>
+  <p-column field="lastmodifiedby" header="Last Modified By" [filter]="true"> </p-column>
+  <p-column header="Last Modified Date" [filter]="true">
+    <ng-template let-role="rowData" pTemplate="body">
+      {{role.lastmodifieddate | date:'dd/MM/yyyy hh:MM:ss'}}
+    </ng-template>
+  </p-column> -->
+
+  <p-footer class="footer-dropdown">
+    <div>
+      Show
+      <p-dropdown #dd [options]="rowPerPage" (onChange)="onShowRowPerPageChange($event.value)"></p-dropdown> Rows
+    </div>
+  </p-footer>
+
+</ifl-dataTable>

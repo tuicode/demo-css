@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.appService.childSaidPageTitle$.subscribe(mess => {
-      console.log('mess ', mess);
       this.title = mess;
     })
   }

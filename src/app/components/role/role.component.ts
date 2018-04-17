@@ -28,10 +28,14 @@ export class RoleComponent implements OnInit {
 
     this.appService.childSayPageTitle(this.pageTitle);
     this.rowPerPage = AppSetting.DEDAULT_ROW_NUMBER;
+    // this.changeTitle.emit(this.pageTitle);
+    this.appService.childSaidPaging$.subscribe(pageNumber => {
+      this.getAllRole(pageNumber);
+    })
   }
 
   ngOnInit() {
-    // this.changeTitle.emit(this.pageTitle);
+
     this.getAllRole();
   }
 

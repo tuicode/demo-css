@@ -7,9 +7,9 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'
 import { SharedModule } from 'primeng/components/common/shared';
-import { IFLSharedModule } from './../../customizedComponents/shared/shared.module';
+import { IFLColumn, Header, Footer, HeaderColumnGroup, FooterColumnGroup, PrimeTemplate } from './../../customizedComponents/shared/shared.module';
 import { PaginatorModule } from 'primeng/components/paginator/paginator';
-import { Column, Header, Footer, HeaderColumnGroup, FooterColumnGroup, PrimeTemplate } from 'primeng/components/common/shared';
+// import { Column, Header, Footer, HeaderColumnGroup, FooterColumnGroup, PrimeTemplate } from 'primeng/components/common/shared';
 import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
 import { FilterMetadata } from 'primeng/components/common//filtermetadata';
 import { SortMeta } from 'primeng/components/common/sortmeta';
@@ -17,6 +17,8 @@ import { DomHandler } from 'primeng/components/dom/domhandler';
 import { ObjectUtils } from 'primeng/components/utils/objectutils';
 import { Subscription } from 'rxjs/Subscription';
 import { BlockableUI } from 'primeng/components/common/blockableui';
+import { AppSetting } from './../../../configs/appSetting';
+import { AppService } from './../../../app.service';
 
 @Component({
   selector: 'p-dtRadioButton',
@@ -107,7 +109,7 @@ export class ColumnHeaders {
 
   constructor(@Inject(forwardRef(() => DataTable)) public dt: DataTable) { }
 
-  @Input("pColumnHeaders") columns: Column[];
+  @Input("pColumnHeaders") columns: IFLColumn[];
 }
 
 @Component({
@@ -127,7 +129,7 @@ export class ColumnFooters {
 
   constructor(@Inject(forwardRef(() => DataTable)) public dt: DataTable) { }
 
-  @Input("pColumnFooters") columns: Column[];
+  @Input("pColumnFooters") columns: IFLColumn[];
 }
 
 @Component({
@@ -206,7 +208,7 @@ export class ColumnFooters {
 })
 export class TableBody {
 
-  @Input("pTableBody") columns: Column[];
+  @Input("pTableBody") columns: IFLColumn[];
   @Input() data: any[];
   constructor(@Inject(forwardRef(() => DataTable)) public dt: DataTable) {
 
@@ -261,7 +263,7 @@ export class ScrollableView implements AfterViewInit, AfterViewChecked, OnDestro
 
   constructor(@Inject(forwardRef(() => DataTable)) public dt: DataTable, public domHandler: DomHandler, public el: ElementRef, public renderer: Renderer2, public zone: NgZone) { }
 
-  @Input("pScrollableView") columns: Column[];
+  @Input("pScrollableView") columns: IFLColumn[];
 
   @Input() headerColumnGroup: HeaderColumnGroup;
 
@@ -439,7 +441,7 @@ export class ScrollableView implements AfterViewInit, AfterViewChecked, OnDestro
 }
 
 @Component({
-  selector: 'ifl-dataTable',
+  selector: 'ifl-datatable',
   template: `
         <div [ngStyle]="style" [class]="styleClass" [style.width]="containerWidth"
             [ngClass]="{'ui-datatable ui-widget':true,'ui-datatable-reflow':responsive,'ui-datatable-stacked':stacked,'ui-datatable-resizable':resizableColumns,'ui-datatable-scrollable':scrollable}">
@@ -487,7 +489,14 @@ export class ScrollableView implements AfterViewInit, AfterViewChecked, OnDestro
                 (onPageChange)="onPageChange($event)" [rowsPerPageOptions]="rowsPerPageOptions" *ngIf="paginator && (paginatorPosition === 'bottom' || paginatorPosition =='both')"
                 [templateLeft]="paginatorLeftTemplate" [templateRight]="paginatorRightTemplate"></p-paginator>
             <div class="ui-datatable-footer ui-widget-header" *ngIf="footer">
-                <ng-content select="p-footer"></ng-content>
+                <ng-content select="p-footer">
+                </ng-content>
+            </div>
+            <div class="ui-widget-header" style="display:flex;flex-direction:row-reverse">
+            <div style="float:right;padding:10px">
+                Show
+                <p-dropdown #dd [options]="rowPerPage" (onChange)="onHandlePageChange($event.value)"></p-dropdown> Rows
+              </div>
             </div>
             
             <div class="ui-column-resizer-helper ui-state-highlight" style="display:none"></div>
@@ -671,7 +680,7 @@ export class DataTable implements AfterViewChecked, AfterViewInit, AfterContentI
 
   @ContentChildren(PrimeTemplate) templates: QueryList<PrimeTemplate>;
 
-  @ContentChildren(Column) cols: QueryList<Column>;
+  @ContentChildren(IFLColumn) cols: QueryList<IFLColumn>;
 
   @ContentChildren(HeaderColumnGroup) headerColumnGroups: QueryList<HeaderColumnGroup>;
 
@@ -687,11 +696,11 @@ export class DataTable implements AfterViewChecked, AfterViewInit, AfterContentI
 
   public filteredValue: any[];
 
-  public columns: Column[];
+  public columns: IFLColumn[];
 
-  public frozenColumns: Column[];
+  public frozenColumns: IFLColumn[];
 
-  public scrollableColumns: Column[];
+  public scrollableColumns: IFLColumn[];
 
   public frozenHeaderColumnGroup: HeaderColumnGroup;
 
@@ -703,7 +712,7 @@ export class DataTable implements AfterViewChecked, AfterViewInit, AfterContentI
 
   public columnsChanged: boolean = false;
 
-  public sortColumn: Column;
+  public sortColumn: IFLColumn;
 
   public columnResizing: boolean;
 
@@ -767,6 +776,7 @@ export class DataTable implements AfterViewChecked, AfterViewInit, AfterContentI
 
   public preventRowClickPropagation: boolean;
 
+  public rowPerPage;
   _multiSortMeta: SortMeta[];
 
   _sortField: string;
@@ -801,8 +811,12 @@ export class DataTable implements AfterViewChecked, AfterViewInit, AfterContentI
 
   constructor(public el: ElementRef, public domHandler: DomHandler, public differs: IterableDiffers,
     public renderer: Renderer2, public changeDetector: ChangeDetectorRef, public objectUtils: ObjectUtils,
-    public zone: NgZone) {
+    public zone: NgZone,
+    private appService: AppService
+  ) {
     this.differ = differs.find([]).create(null);
+    this.rowPerPage = AppSetting.DEDAULT_ROW_NUMBER;
+
   }
 
   ngOnInit() {
@@ -1165,7 +1179,7 @@ export class DataTable implements AfterViewChecked, AfterViewInit, AfterContentI
     });
   }
 
-  onHeaderKeydown(event, column: Column) {
+  onHeaderKeydown(event, column: IFLColumn) {
     if (event.keyCode == 13) {
       this.sort(event, column);
       event.preventDefault();
@@ -1182,7 +1196,7 @@ export class DataTable implements AfterViewChecked, AfterViewInit, AfterContentI
     }
   }
 
-  sort(event, column: Column) {
+  sort(event, column: IFLColumn) {
     if (!column.sortable) {
       return;
     }
@@ -1313,7 +1327,7 @@ export class DataTable implements AfterViewChecked, AfterViewInit, AfterContentI
       this.multiSortMeta.push(meta);
   }
 
-  isSorted(column: Column) {
+  isSorted(column: IFLColumn) {
     if (!column.sortable) {
       return false;
     }
@@ -1337,7 +1351,7 @@ export class DataTable implements AfterViewChecked, AfterViewInit, AfterContentI
     }
   }
 
-  getSortOrder(column: Column) {
+  getSortOrder(column: IFLColumn) {
     let order = 0;
     let columnSortField = column.sortField || column.field;
 
@@ -1651,6 +1665,9 @@ export class DataTable implements AfterViewChecked, AfterViewInit, AfterContentI
     }
   }
 
+  onHandlePageChange(event) {
+    this.appService.childSayPaging(event);
+  }
   rowDblclick(event, rowData) {
     this.onRowDblclick.emit({ originalEvent: event, data: rowData });
   }
@@ -1917,7 +1934,7 @@ export class DataTable implements AfterViewChecked, AfterViewInit, AfterContentI
     }
   }
 
-  switchCellToEditMode(cell: any, column: Column, rowData: any) {
+  switchCellToEditMode(cell: any, column: IFLColumn, rowData: any) {
     if (!this.selectionMode && this.editable && column.editable) {
       this.editorClick = true;
       this.bindDocumentEditListener();
@@ -1971,7 +1988,7 @@ export class DataTable implements AfterViewChecked, AfterViewInit, AfterContentI
     }
   }
 
-  onCellEditorKeydown(event, column: Column, rowData: any, rowIndex: number) {
+  onCellEditorKeydown(event, column: IFLColumn, rowData: any, rowIndex: number) {
     if (this.editable) {
       //enter
       if (event.keyCode == 13) {
@@ -1997,13 +2014,13 @@ export class DataTable implements AfterViewChecked, AfterViewInit, AfterContentI
     }
   }
 
-  onCellEditorInput(event, column: Column, rowData: any, rowIndex: number) {
+  onCellEditorInput(event, column: IFLColumn, rowData: any, rowIndex: number) {
     if (this.editable) {
       this.onEdit.emit({ originalEvent: event, column: column, data: rowData, index: rowIndex });
     }
   }
 
-  onCellEditorChange(event, column: Column, rowData: any, rowIndex: number) {
+  onCellEditorChange(event, column: IFLColumn, rowData: any, rowIndex: number) {
     if (this.editable) {
       this.editChanged = true;
 
@@ -2011,7 +2028,7 @@ export class DataTable implements AfterViewChecked, AfterViewInit, AfterContentI
     }
   }
 
-  onCellEditorBlur(event, column: Column, rowData: any, rowIndex: number) {
+  onCellEditorBlur(event, column: IFLColumn, rowData: any, rowIndex: number) {
     if (this.editable) {
       if (this.editChanged)
         this.editChanged = false;

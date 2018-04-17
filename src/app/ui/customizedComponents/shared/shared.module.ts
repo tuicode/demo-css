@@ -2,11 +2,28 @@ import { NgModule, EventEmitter, Directive, ViewContainerRef, Input, Output, Con
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
+@Component({
+    selector: 'p-header',
+    template: '<ng-content></ng-content>'
+})
+export class Header { }
+
+@Component({
+    selector: 'p-footer',
+    template: '<ng-content></ng-content>'
+})
+export class Footer { }
+
+@Directive({
+    selector: '[pTemplate]',
+    host: {
+    }
+})
 export class PrimeTemplate {
 
     @Input() type: string;
 
-    @Input('pTemplate') name: string = 'body';
+    @Input('pTemplate') name: string;
 
     constructor(public template: TemplateRef<any>) { }
 
@@ -14,6 +31,8 @@ export class PrimeTemplate {
         return this.name;
     }
 }
+
+
 
 /* Deprecated */
 @Component({
@@ -37,7 +56,7 @@ export class IFLColumn implements AfterContentInit {
     @Input() colspan: number;
     @Input() scope: string;
     @Input() style: any;
-    @Input() styleClass: string;
+    @Input() styleClass: string = 'action-with';
     @Input() exportable: boolean = true;
     @Input() headerStyle: any;
     @Input() headerStyleClass: string;
@@ -93,8 +112,6 @@ export class IFLColumn implements AfterContentInit {
     }
 }
 
-
-
 /* Deprecated */
 @Component({
     selector: 'p-row',
@@ -106,9 +123,33 @@ export class Row {
 
 }
 
+/* Deprecated */
+@Component({
+    selector: 'p-headerColumnGroup',
+    template: ``
+})
+export class HeaderColumnGroup {
+
+    @Input() frozen: boolean;
+
+    @ContentChildren(Row) rows: QueryList<any>;
+}
+
+/* Deprecated */
+@Component({
+    selector: 'p-footerColumnGroup',
+    template: ``
+})
+export class FooterColumnGroup {
+
+    @Input() frozen: boolean;
+
+    @ContentChildren(Row) rows: QueryList<any>;
+}
+
 @NgModule({
     imports: [CommonModule],
-    exports: [IFLColumn, Row],
-    declarations: [IFLColumn, Row]
+    exports: [Header, Footer, IFLColumn, PrimeTemplate, Row, HeaderColumnGroup, FooterColumnGroup],
+    declarations: [Header, Footer, IFLColumn, PrimeTemplate, Row, HeaderColumnGroup, FooterColumnGroup]
 })
 export class IFLSharedModule { }

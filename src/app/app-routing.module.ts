@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './auth/auth.guard';
-import { HeaderComponent } from './core/header/header.component';
-import { LoginComponent } from './core/login/login.component';
-import { HomeComponent } from './components/home/home.component';
+import { AuthGuard } from './../app/core/guard/auth.guard';
+import { HeaderComponent } from './core/layouts/header/header.component';
+import { LoginComponent } from './core/layouts/login/login.component';
+import { HomeComponent } from './core/layouts/home/home.component';
 import { HomeLayoutComponent } from './core/layouts/home-layout/home-layout.component';
 import { LoginLayoutComponent } from './core/layouts/login-layout/login-layout.component';
-import { ContentWrapperComponent } from './core/content-wrapper/content-wrapper.component';
-import { OrderComponent } from './components/order/order.component';
-import { MenuComponent } from './components/menu/menu.component';
-import { ErrorsComponent } from './core/errors/errors.component';
-import { RoleComponent } from './components/role/role.component';
+import { ContentWrapperComponent } from './core/layouts/content-wrapper/content-wrapper.component';
+// import { MenuComponent } from './pages/ADMIN/menu/menu.component';
+import { ErrorsComponent } from './core/layouts/errors/errors.component';
+import { RoleComponent } from './pages/ADMIN/role/role.component';
 
 const routes: Routes = [
 
@@ -19,11 +18,9 @@ const routes: Routes = [
     path: '',
     component: HomeLayoutComponent,
     canActivate: [AuthGuard],
-
     children: [{
       path: '',
-
-      component: ContentWrapperComponent
+      component: ContentWrapperComponent,
     },
     {
       path: 'roles',
@@ -35,13 +32,8 @@ const routes: Routes = [
     {
       path: 'error',
       component: ErrorsComponent
-    }, {
-      path: 'menu',
-      data: {
-        breadcrumb: 'System admistration > menu'
-      },
-      component: MenuComponent
-    }]
+    },
+    ]
   },
   {
     path: '',

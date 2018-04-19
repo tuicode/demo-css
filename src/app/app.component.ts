@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
-import { LoaderService } from './shared/services/loader.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +7,14 @@ import { LoaderService } from './shared/services/loader.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'app';
+  title = 'infolog demo';
+  constructor(private translateService: TranslateService) {
+    this.translateService = translateService;
+    this.translateService.setDefaultLang('en');
+    this.translateService.use('vn');
+    //let browserLang = this.translateService.getBrowserLang();
 
-  constructor() {
+    //this.translateService.use(browserLang.match(/en|fr/) ? browserLang : 'en');
 
   }
 

@@ -41,7 +41,6 @@ export class ErrorsService {
     // const errorWithContext = { appId, user, time, id, url, status, message, stack };
     return error;
   }
-
 }
 
 class fakeHttpService {

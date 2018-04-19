@@ -61,7 +61,6 @@
   <script>
     $(document).ready(function () {
       var inputs = document.querySelectorAll('.form-control1');
-      console.log('inputs ', inputs);
       for (var i = 0; i < inputs.length; i++) {
         inputs[i].addEventListener('focus', function () {
           this.parentElement.classList.add('focus');

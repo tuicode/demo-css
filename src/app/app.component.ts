@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   constructor(private translateService: TranslateService) {
     this.translateService = translateService;
     this.translateService.setDefaultLang('en');
-    this.translateService.use('vn');
+    this.translateService.use('en');
     //let browserLang = this.translateService.getBrowserLang();
 
     //this.translateService.use(browserLang.match(/en|fr/) ? browserLang : 'en');
@@ -19,6 +19,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    var obj = { a: 1 };
+    var copy = Object.assign({}, {a :1},{b: 2, c:3});
+    console.log(copy); // { a: 1 }
   }
 }

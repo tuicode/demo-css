@@ -1,0 +1,109 @@
+<p-growl [value]="msgs" sticky="sticky"></p-growl>
+
+<div>
+    <div class="row">
+        <div class="col-md-6">
+            <button pButton type="button" label="Save" class="ui-button-success"></button>
+            <button pButton type="button" label="Cancel" class="ui-button-secondary"></button>
+        </div>
+        <div class="col-md-6">
+            <div style="display: flex;float:right;">
+                <div> Show all fields</div>
+                <div>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row editrole">
+        <div class="col-md-6">
+            <form [formGroup]="frmRoleForm" autocomplete="false" novalidate>
+
+                <table>
+                    <tr class="tr-h">
+                        <td class="td-p-left">Role ID</td>
+                        <td>
+                            <input pInputText type="text" formControlName="roleID" />
+                            <span class="msg-r">*</span>
+                            <!-- <input type="text" pInputText name="roleid" /> -->
+                            <span class="ui-message ui-messages-error ui-corner-all" *ngIf="!frmRoleForm.controls['roleID'].valid&&frmRoleForm.controls['roleID'].dirty">
+                                <i class="fa fa-close"></i>
+                                Firstname is required
+                            </span>
+                        </td>
+
+                    </tr>
+                    <tr class="tr-h">
+                        <td class="td-p-left">Description</td>
+                        <td>
+                            <input type="text" pInputText  formControlName="Description"/>
+                            <span class="msg-r">*</span>
+                            <!-- <input type="text" pInputText name="roleid" /> -->
+                            <span class="ui-message ui-messages-error ui-corner-all" *ngIf="!frmRoleForm.controls['Description'].valid&&frmRoleForm.controls['Description'].dirty">
+                                <i class="fa fa-close"></i>
+                                Firstname is required
+                            </span>
+                        </td>
+                    </tr>
+                    <tr class="tr-h">
+                        <td class="ptr-left">Active</td>
+                        <td>
+                            <p-checkbox name="groupname" checked> </p-checkbox>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <table>
+                <tr class="tr-h">
+                    <td class="td-p-left">Created by</td>
+                    <td>
+                        <span>Roberto Carlos</span>
+                    </td>
+                </tr>
+                <tr class="tr-h">
+                    <td class="td-p-left">Created Date</td>
+                    <td>
+                        <span>01/04/2018 11:20:56</span>
+                    </td>
+                </tr>
+                <tr class="tr-h">
+                    <td class="td-p-left">Last Modified By</td>
+                    <td>
+                        <span>Carlos De La Hoya</span>
+                    </td>
+                </tr>
+
+                <tr class="tr-h">
+                    <td class="td-p-left">Last Modified Date</td>
+                    <td>
+                        <span>03/04/2018 15:01:26</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <p-tabView>
+            <p-tabPanel header="Permissions" style="border-top: 0;">
+                The story begins as Don Vito Corleone, the head of a New York Mafia family, overseeshis daughter's wedding. His beloved son
+                ichael has just come home from the war, but does not intend to become part of his father's business. T hrough
+                Michael's life the nature of the family business becomes clear. The business of the family is just like the
+                head of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever
+                anything stands against the good of the family.
+            </p-tabPanel>
+            <p-tabPanel header="Users">
+                Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young Vito
+                Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side
+                of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the
+                local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing
+                brood in Little Italy, killing the local Black Hand Fanucci after he demands his customary cut of the tyro's
+                business. With Fanucci gone, Vito's communal stature grows.
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+</div>

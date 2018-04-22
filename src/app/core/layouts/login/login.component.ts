@@ -4,8 +4,8 @@ import { AdminUser } from './../../models/adminuser';
 import { AuthService } from './../../guard/auth.service';
 import { NgForm } from '@angular/forms';
 import { LoaderService } from './../../../shared/services/loader.service';
-import * as _ from "lodash";
-import { Router } from '@angular/router';
+import * as _ from 'lodash';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,53 +17,35 @@ export class LoginComponent implements OnInit {
   public user: User = new User();
   public isCustomerLogo = false;
   public isError = false;
+  errors: string;
+  isRequesting: boolean;
+  submitted: boolean = false;
 
   constructor(
     private authService: AuthService,
     private loaderService: LoaderService,
     private router: Router,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  login(username, password): void {
-
-    if (username && password) {
-      this.loaderService.displayLoader(true);
-      this.authService.fetchedUser().subscribe(
-        response => {
-          if (response) {
-            var users = response;
-            console.log('user :', users);
-            var result = this.findUser(users, username, password);
+  login(username, password) {
+    this.submitted = true;
+    this.isRequesting = true;
+    this.errors = '';
+    if (username && username) {
+      this.authService.login(username, password)
+        .finally(() => this.isRequesting = false)
+        .subscribe(
+          result => {
             if (result) {
-              var token = 'test-demo'
-              //result.authToken = token;
-              //var userAuthen = {username : result.username,}
-              localStorage.setItem('currentUser', JSON.stringify(result));
-              this.router.navigate(['/']);
+              this.router.navigateByUrl(this.returnUrl);
             }
-            else {
-              this.isError = true;
-            }
-            this.loaderService.displayLoader(false);
-          }
-
-        }, error => {
-          console.log('err ', error);
-        }
-      )
+          },
+          error => this.errors = error);
     }
-  }
-
-
-  findUser(adminUsers: AdminUser[], username, password): AdminUser {
-    var result = _.find(adminUsers, function (item) {
-      if (item.name === username && item.password === password) {
-        return item;
-      }
-    })
-    return result;
   }
 }

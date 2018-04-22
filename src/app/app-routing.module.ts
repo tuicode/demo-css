@@ -11,6 +11,7 @@ import { ContentWrapperComponent } from './core/layouts/content-wrapper/content-
 // import { MenuComponent } from './pages/ADMIN/menu/menu.component';
 import { ErrorsComponent } from './core/layouts/errors/errors.component';
 import { RoleComponent } from './pages/ADMIN/role/role.component';
+import { EditRoleComponent } from './pages/ADMIN/role/edit-role/edit-role.component';
 
 const routes: Routes = [
 
@@ -28,6 +29,13 @@ const routes: Routes = [
         breadcrumb: 'System admistration > roles'
       },
       component: RoleComponent
+    },
+    {
+      path: 'roles/:id',
+      data: {
+        breadcrumb: 'System admistration > roles > edit'
+      },
+      component: EditRoleComponent
     },
     {
       path: 'error',

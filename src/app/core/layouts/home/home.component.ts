@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, ViewChild } from '@angular/core';
 import { AppService } from './../../../app.service';
+ 
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.appService.childSaidPageTitle$.subscribe(mess => {
       this.title = mess;
     })

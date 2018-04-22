@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, PRIMARY_OUTLET, Params } from '@angular/router';
 import { BreadCrumb } from './../bread-crumb/models/breadcrumb.class';
 import "rxjs/add/operator/filter";
+import { MenuItem } from 'primeng/api';
 
 interface IBreadcrumb {
   label: string;
@@ -25,7 +26,7 @@ export class BreadCrumbComponent implements OnInit {
   // Build your breadcrumb starting with the root route of your current activated route
 
   public breadcrumbs: IBreadcrumb[];
-
+  private items: MenuItem[];
   public title: string = 'Home';
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -35,6 +36,17 @@ export class BreadCrumbComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.items = [
+      { label: 'Categories' },
+      { label: 'Sports' },
+      { label: 'Football' },
+      { label: 'Countries' },
+      { label: 'Spain' },
+      { label: 'F.C. Barcelona' },
+      { label: 'Squad' },
+      { label: 'Lionel Messi', url: 'https://en.wikipedia.org/wiki/Lionel_Messi' }
+    ];
 
     const ROUTE_DATA_BREADCRUMB: string = "breadcrumb";
     //subscribe to the NavigationEnd event

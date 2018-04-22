@@ -9,6 +9,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './core/guard/auth.guard';
 import { AuthService } from './core/guard/auth.service';
 import { AccordionModule } from 'primeng/primeng';
+import { HttpModule, XHRBackend } from '@angular/http';
+import { AuthenticateXHRBackend } from './core/guard/authenticate-xhr.backend';
+import { CustomHttpInterceptor } from './../app/core/interceptors/headerInterceptor';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TabViewModule } from 'primeng/tabview';
 // handle global log
 
 import { ErrorsHandle } from './errors-handler';
@@ -21,6 +26,8 @@ import { CheckboxModule } from 'primeng/primeng';
 import { PaginatorModule, DataTableModule } from 'primeng/primeng';
 import { IFLDataTableModule } from './../../src/app/shared/ui/customizedComponents/ifl-datatable.module';
 import { IFLSharedModule } from './../../src/app/shared/ui/customizedComponents/ifl-shared.module';
+import { InputTextModule } from 'primeng/inputtext';
+
 
 import { MessageModule } from 'primeng/message';
 import { DropdownModule } from 'primeng/dropdown';
@@ -53,6 +60,7 @@ import { NotfoundComponent } from './core/layouts/notfound/notfound.component';
 import { ErrorsComponent } from './core/layouts/errors/errors.component';
 import { RoleComponent } from './pages/ADMIN/role/role.component';
 import { AsnComponent } from './../app/pages/WMS/asn/asn.component';
+import { EditRoleComponent } from './pages/ADMIN/role/edit-role/edit-role.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +81,7 @@ import { AsnComponent } from './../app/pages/WMS/asn/asn.component';
     RoleComponent,
     AsnComponent,
     MenuComponent,
+    EditRoleComponent,
   ],
   exports: [
 
@@ -83,6 +92,7 @@ import { AsnComponent } from './../app/pages/WMS/asn/asn.component';
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
+    HttpModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot({
       loader: {
@@ -103,6 +113,9 @@ import { AsnComponent } from './../app/pages/WMS/asn/asn.component';
     BreadcrumbModule,
     IFLSharedModule,
     IFLDataTableModule,
+    InputTextModule,
+    ReactiveFormsModule,
+    TabViewModule
     //ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [AuthGuard, AuthService, LoaderService,
@@ -110,7 +123,13 @@ import { AsnComponent } from './../app/pages/WMS/asn/asn.component';
     ErrorsService,
     AppService,
     { provide: APP_BASE_HREF, useValue: '/' },
-    { provide: ErrorHandler, useClass: ErrorsHandle }
+    { provide: ErrorHandler, useClass: ErrorsHandle },
+    {
+      provide: XHRBackend,
+      useClass: AuthenticateXHRBackend
+    },
+    // { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true },
+
   ],
 
   bootstrap: [AppComponent]

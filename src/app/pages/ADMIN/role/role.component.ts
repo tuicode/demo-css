@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { RoleService } from './services/role.service';
 import { Role } from './models/role';
 import { LoaderService } from './../../../shared/services/loader.service';
@@ -7,12 +8,12 @@ import { DropDownOption } from './../../../shared/models/dropdown-option';
 import { AppSetting } from './../../../core/configs/appSetting';
 import { AppService } from './../../../app.service';
 
+
 @Component({
   selector: 'app-role',
   templateUrl: './role.component.html',
   styleUrls: ['./role.component.scss']
 })
-
 
 export class RoleComponent implements OnInit {
 
@@ -20,17 +21,19 @@ export class RoleComponent implements OnInit {
   public rowPerPage;
   public pageTitle: string = 'Roles';
 
+
   constructor(
     private loaderService: LoaderService,
     private roleService: RoleService,
     private appService: AppService,
+    private router: Router
   ) {
+
 
     this.appService.childSayPageTitle(this.pageTitle);
     this.rowPerPage = AppSetting.DEDAULT_ROW_NUMBER;
-    // this.changeTitle.emit(this.pageTitle);
     this.appService.childSaidPaging$.subscribe(pageNumber => {
-      this.getAllRole(pageNumber);
+    this.getAllRole(pageNumber);
     })
   }
 
@@ -56,11 +59,13 @@ export class RoleComponent implements OnInit {
   }
 
   edit(row) {
-    // console.log('row ========>', row);
+    console.log('row ========>', row);
+    debugger;
+    this.router.navigate['roles' + '/' + row.id]
   }
 
   onShowRowPerPageChange(event) {
-    this.getAllRole(event);
+    // this.getAllRole(event);
   }
 
   paging(datas, rowNumber) {
@@ -74,5 +79,7 @@ export class RoleComponent implements OnInit {
     // console.log('data', datas);
     return datas.splice(0, totalRow <= num ? totalRow : num)
   }
+
+
 
 }

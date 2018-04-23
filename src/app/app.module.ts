@@ -27,7 +27,7 @@ import { PaginatorModule, DataTableModule } from 'primeng/primeng';
 import { IFLDataTableModule } from './../../src/app/shared/ui/customizedComponents/ifl-datatable.module';
 import { IFLSharedModule } from './../../src/app/shared/ui/customizedComponents/ifl-shared.module';
 import { InputTextModule } from 'primeng/inputtext';
-
+import { DialogModule } from 'primeng/dialog';
 
 import { MessageModule } from 'primeng/message';
 import { DropdownModule } from 'primeng/dropdown';
@@ -61,6 +61,7 @@ import { ErrorsComponent } from './core/layouts/errors/errors.component';
 import { RoleComponent } from './pages/ADMIN/role/role.component';
 import { AsnComponent } from './../app/pages/WMS/asn/asn.component';
 import { EditRoleComponent } from './pages/ADMIN/role/edit-role/edit-role.component';
+
 
 @NgModule({
   declarations: [
@@ -115,7 +116,8 @@ import { EditRoleComponent } from './pages/ADMIN/role/edit-role/edit-role.compon
     IFLDataTableModule,
     InputTextModule,
     ReactiveFormsModule,
-    TabViewModule
+    TabViewModule,
+    DialogModule
     //ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [AuthGuard, AuthService, LoaderService,

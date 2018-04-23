@@ -486,18 +486,22 @@ export class ScrollableView implements AfterViewInit, AfterViewChecked, OnDestro
                 </div>
             </ng-template>
             
-            <p-paginator [rows]="rows" [first]="first" [totalRecords]="totalRecords" [pageLinkSize]="pageLinks" styleClass="ui-paginator-bottom" [alwaysShow]="alwaysShowPaginator"
-                (onPageChange)="onPageChange($event)" [rowsPerPageOptions]="rowsPerPageOptions" *ngIf="paginator && (paginatorPosition === 'bottom' || paginatorPosition =='both')"
-                [templateLeft]="paginatorLeftTemplate" [templateRight]="paginatorRightTemplate"></p-paginator>
+     
             <div class="ui-datatable-footer ui-widget-header" *ngIf="footer">
                 <ng-content select="p-footer">
                 </ng-content>
             </div>
+            
             <div class="ui-widget-header" style="display:flex;flex-direction:row-reverse">
-            <div style="float:right;padding:10px">
-                Show
-                <p-dropdown #dd [options]="rowPerPage" (onChange)="onHandlePageChange($event.value)"></p-dropdown> Rows
-              </div>
+            <div style="padding:10px 10px 10px 0;position:absolute;left:0">
+            <p-paginator [rows]="rows" [first]="first" [totalRecords]="totalRecords" [pageLinkSize]="pageLinks" styleClass="ui-paginator-bottom" [alwaysShow]="alwaysShowPaginator"
+            (onPageChange)="onPageChange($event)" [rowsPerPageOptions]="rowsPerPageOptions" *ngIf="paginator && (paginatorPosition === 'bottom' || paginatorPosition =='both')"
+            [templateLeft]="paginatorLeftTemplate" [templateRight]="paginatorRightTemplate"></p-paginator>
+            </div>
+              <div style="float:right;padding:10px;" >
+                  Show
+                  <p-dropdown #dd [options]="rowPerPage" (onChange)="onHandlePageChange($event.value)"></p-dropdown> Rows
+                </div>
             </div>
             
             <div class="ui-column-resizer-helper ui-state-highlight" style="display:none"></div>
@@ -509,7 +513,7 @@ export class ScrollableView implements AfterViewInit, AfterViewChecked, OnDestro
 })
 export class DataTable implements AfterViewChecked, AfterViewInit, AfterContentInit, OnInit, OnDestroy, BlockableUI {
 
-  @Input() paginator: boolean = false;
+  @Input() paginator: boolean = true;
 
   @Input() rows: number = 10;
 

@@ -1,24 +1,24 @@
 <p-growl [value]="msgs" sticky="sticky"></p-growl>
 
-<div>
-    <div class="row">
+<div class="box box-primary">
+    <div class="row row-m">
         <div class="col-md-6">
             <button pButton type="button" label="Save" class="ui-button-success"></button>
-            <button pButton type="button" label="Cancel" class="ui-button-secondary"></button>
+            <button pButton type="button" label="Cancel" class="ui-button-secondary btn-m-l"></button>
         </div>
         <div class="col-md-6">
             <div style="display: flex;float:right;">
-                <div> Show all fields</div>
+                <div style="padding: 3px 5px 0 0"> Show all fields</div>
                 <div>
                     <label class="switch">
-                        <input type="checkbox" checked>
+                        <input type="checkbox" (click)="hideFields()">
                         <span class="slider"></span>
                     </label>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row editrole">
+    <div class="row editrole row-m">
         <div class="col-md-6">
             <form [formGroup]="frmRoleForm" autocomplete="false" novalidate>
 
@@ -31,7 +31,7 @@
                             <!-- <input type="text" pInputText name="roleid" /> -->
                             <span class="ui-message ui-messages-error ui-corner-all" *ngIf="!frmRoleForm.controls['roleID'].valid&&frmRoleForm.controls['roleID'].dirty">
                                 <i class="fa fa-close"></i>
-                                Firstname is required
+                                Role ID is required
                             </span>
                         </td>
 
@@ -39,12 +39,12 @@
                     <tr class="tr-h">
                         <td class="td-p-left">Description</td>
                         <td>
-                            <input type="text" pInputText  formControlName="Description"/>
+                            <input type="text" pInputText formControlName="Description" />
                             <span class="msg-r">*</span>
                             <!-- <input type="text" pInputText name="roleid" /> -->
                             <span class="ui-message ui-messages-error ui-corner-all" *ngIf="!frmRoleForm.controls['Description'].valid&&frmRoleForm.controls['Description'].dirty">
                                 <i class="fa fa-close"></i>
-                                Firstname is required
+                                Description is required
                             </span>
                         </td>
                     </tr>
@@ -57,7 +57,7 @@
                 </table>
             </form>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" *ngIf="isShowAllFields">
             <table>
                 <tr class="tr-h">
                     <td class="td-p-left">Created by</td>
@@ -87,23 +87,96 @@
             </table>
         </div>
     </div>
-    <div class="row">
+    <div class="row" style="margin-left: 0;margin-right: 0">
         <p-tabView>
             <p-tabPanel header="Permissions" style="border-top: 0;">
-                The story begins as Don Vito Corleone, the head of a New York Mafia family, overseeshis daughter's wedding. His beloved son
-                ichael has just come home from the war, but does not intend to become part of his father's business. T hrough
-                Michael's life the nature of the family business becomes clear. The business of the family is just like the
-                head of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever
-                anything stands against the good of the family.
+                <div class="box-body">
+                    <ifl-datatable #dtpermission [value]="roles">
+                        <ifl-column header="#" [filter]="false" [style]="{'width':'5%','text-align': 'center'}">
+                            <ng-template pTemplate="body">
+                                <p-checkbox binary="true"></p-checkbox>
+                            </ng-template>
+                        </ifl-column>
+                        <ifl-column field="MenuID" header="Menu ID"
+                         [style]="{'width':'25%'}"></ifl-column>
+                        <ifl-column field="Description" header="Description"  [style]="{'width':'25%'}"> </ifl-column>
+                        <ifl-column field="ModuleID" header="Module ID" [style]="{'width':'20%'}"></ifl-column>
+                        <ifl-column field="PermissionID" header="Permission"  [style]="{'width':'25%'}" filterMatchMode="equals">
+                            <ng-template pTemplate="body" let-col let-role="rowData" pTemplate="body">
+                                <p-dropdown #dd [options]="permissionList" [style]="{'width':'150px'}" [(ngModel)]="role[col.field]" appendTo="body" [ngModelOptions]="{standalone: true}"
+                                    (onChange)="onSelectedPermission($event.value,role)" *ngIf="role.PermissionMode !== 0"></p-dropdown>
+                            </ng-template>
+                        </ifl-column>
+                    </ifl-datatable>
+                </div>
+
             </p-tabPanel>
             <p-tabPanel header="Users">
-                Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young Vito
-                Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side
-                of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the
-                local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing
-                brood in Little Italy, killing the local Black Hand Fanucci after he demands his customary cut of the tyro's
-                business. With Fanucci gone, Vito's communal stature grows.
+                <div class="btn-m-l-10">
+                    <button pButton type="button" label="Add User" class="ui-button-secondary"></button>
+                </div>
+                <div class="box-body">
+                    <ifl-datatable #dtuser [value]="users" [editable]="true" [(selection)]="selection">
+                        <ifl-column header="#" [filter]="false" [style]="{'width':'5%','text-align': 'center'}">
+                            <ng-template pTemplate="body">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </ng-template>
+                        </ifl-column>
+                        <ifl-column field="UserID" header="User ID" [filter]="false" [style]="{'width':'30%'}"></ifl-column>
+                        <ifl-column field="UserName" [editable]="true" header="Full Name" [filter]="false" [style]="{'width':'30%'}"> </ifl-column>
+                        <ifl-column field="companies" [filter]="false" header="Company Name" [editable]="true">
+                            <ng-template let-col let-user="rowData" pTemplate="editor">
+                                <p-dropdown #ddcompany [options]="companies" [style]="{'width':'150px'}" [(ngModel)]="user[col.field]" required="true" appendTo="body"
+                                    [ngModelOptions]="{standalone: true}" (onChange)="onSelectedCompany($event.value,user)"></p-dropdown>
+                            </ng-template>
+                        </ifl-column>
+                    </ifl-datatable>
+                </div>
             </p-tabPanel>
         </p-tabView>
     </div>
 </div>
+
+<button type="button" pButton icon="fa-external-link-square" label="Show" (click)="showDialog()"></button>
+
+
+<p-dialog header="Permissions" [(visible)]="display" modal="modal" [width]="650" [minWidth]="300" [minY]="70">
+    <div>
+        <button pButton type="button" label="Save" class="ui-button-success"></button>
+        <button pButton type="button" label="Cancel" class="ui-button-secondary btn-m-l"></button>
+    </div>
+    <div class="row row-m">
+        <table>
+            <tr class="tr-h ">
+                <td class="td-p-left">Menu ID</td>
+                <td>WM 01</td>
+            </tr>
+            <tr class="tr-h">
+                <td class="td-p-left">Description</td>
+                <td>Shipments</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <ifl-datatable #dtpermission [value]="roles">
+                        <ifl-column header="#" [filter]="false" [style]="{'width':'5%','text-align': 'center'}">
+                            <ng-template pTemplate="body">
+                                <p-checkbox binary="true"></p-checkbox>
+                            </ng-template>
+                        </ifl-column>
+                        <ifl-column field="MenuID" header="Menu ID" [filter]="false" [style]="{'width':'25%'}"></ifl-column>
+                        <ifl-column field="Description" header="Description" [filter]="false" [style]="{'width':'25%'}"> </ifl-column>
+                        <ifl-column field="ModuleID" header="Module ID" [filter]="false" [style]="{'width':'20%'}"></ifl-column>
+                        <ifl-column field="PermissionID" header="Permission" [filter]="false" [style]="{'width':'25%'}" filterMatchMode="equals">
+                            <ng-template pTemplate="body" let-col let-role="rowData" pTemplate="body">
+                                <p-dropdown #dd [options]="permissionList" [(ngModel)]="role[col.field]" appendTo="body" [ngModelOptions]="{standalone: true}"
+                                    (onChange)="onSelectedPermission($event.value,role)" *ngIf="role.PermissionMode !== 0"></p-dropdown>
+                            </ng-template>
+                        </ifl-column>
+                    </ifl-datatable>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+</p-dialog>

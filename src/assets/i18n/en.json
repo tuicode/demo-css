@@ -1,8 +1,16 @@
 {
   "RoleID": "Role ID",
-  "Description" : "Description",
-  "Active" : "Active",
-  "Last Modified By"  : "Last Modified By",
-  "Last Modified Date"  : "Last Modified Date",
-  "Admin.Roles.RoleID" : "Menu ID"
+  "Description": "Description",
+  "Active": "Active",
+  "Last Modified By": "Last Modified By",
+  "Last Modified Date": "Last Modified Date",
+  "Admin.Roles.RoleID": "Menu ID",
+  "btnsave": "Save",
+  "btn": "Cancel",
+  "showallfieds": "Show all fields",
+  "tabpermissions": "Permissions",
+  "tabuser": "Users",
+  "popupTitle": "Permissions",
+  "pagingShow": "Show",
+  "pagingRow": "Rows"
 }

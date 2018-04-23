@@ -15,6 +15,9 @@
 
 .btn-add{
     margin: 10px 0 10px 0;
+    border-radius: 0;
+    background-color: green;
+    height: 30px;
 }
 
 :host /deep/ .chkbox-center{

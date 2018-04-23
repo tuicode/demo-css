@@ -33,19 +33,20 @@ export class AuthService extends BaseService {
    
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http
-      .post(
-        this.baseUrl + '/auth/login',
-        JSON.stringify({ userName, password }), { headers }
-      )
-      .map(res => res.json())
-      .map(res => {
-        localStorage.setItem('auth_token', res.auth_token);
-        this.loggedIn = true;
-        this._authNavStatusSource.next(true);
-        return true;
-      })
-      .catch(this.handleError);
+    // return this.http
+    //   .post(
+    //     this.baseUrl + '/auth/login',
+    //     JSON.stringify({ userName, password }), { headers }
+    //   )
+    //   .map(res => res.json())
+    //   .map(res => {
+    //     localStorage.setItem('auth_token', res.auth_token);
+    //     this.loggedIn = true;
+    //     this._authNavStatusSource.next(true);
+    //     return true;
+    //   })
+    //   .catch(this.handleError);
+    localStorage.setItem('auth_token', 'abc');
   }
 
   logout() {

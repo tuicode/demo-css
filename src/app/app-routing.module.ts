@@ -31,6 +31,13 @@ const routes: Routes = [
       component: RoleComponent
     },
     {
+      path: 'roles/add',
+      data: {
+        breadcrumb: 'System admistration > roles > add'
+      },
+      component: EditRoleComponent
+    },
+    {
       path: 'roles/:id',
       data: {
         breadcrumb: 'System admistration > roles > edit'

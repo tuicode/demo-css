@@ -729,7 +729,7 @@ export class DataTable implements AfterViewChecked, AfterViewInit, AfterContentI
 
   public resizerHelper: any;
 
-  public resizeColumn: any;
+  public resizeColumn: any = true;
 
   public reorderIndicatorUp: any;
 

@@ -7,7 +7,7 @@ import { SelectItem } from 'primeng/api';
 import { DropDownOption } from './../../../shared/models/dropdown-option';
 import { AppSetting } from './../../../core/configs/appSetting';
 import { AppService } from './../../../app.service';
-
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-role',
@@ -20,20 +20,21 @@ export class RoleComponent implements OnInit {
   public roles: Role[] = [];
   public rowPerPage;
   public pageTitle: string = 'Roles';
-
+  cols: any[];
 
   constructor(
     private loaderService: LoaderService,
     private roleService: RoleService,
     private appService: AppService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
 
 
     this.appService.childSayPageTitle(this.pageTitle);
     this.rowPerPage = AppSetting.DEDAULT_ROW_NUMBER;
     this.appService.childSaidPaging$.subscribe(pageNumber => {
-    this.getAllRole(pageNumber);
+      this.getAllRole(pageNumber);
     })
   }
 
@@ -60,7 +61,7 @@ export class RoleComponent implements OnInit {
 
   edit(row) {
     console.log('row ========>', row);
-    debugger;
+
     this.router.navigate['roles' + '/' + row.id]
   }
 
@@ -79,7 +80,5 @@ export class RoleComponent implements OnInit {
     // console.log('data', datas);
     return datas.splice(0, totalRow <= num ? totalRow : num)
   }
-
-
 
 }

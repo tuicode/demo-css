@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -35,21 +36,55 @@ export class EditRoleComponent implements OnInit {
   isShowAllFields: boolean = true;
   display: boolean = false;
   users: UserDTO[];
+  cols: any[];
+
   constructor(
     private fb: FormBuilder,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    public activateRoute: ActivatedRoute
+
   ) { }
 
   ngAfterViewInit() {
     this.cdr.detectChanges();
   }
 
+
+
+  toFormGroup(questions) {
+
+    console.log('questions  ======', questions);
+    let group: any = {};
+    group[questions.key] = new FormControl(questions.value || '', this.getValidators(questions));
+    return new FormGroup(group);
+  }
+
+  getValidators(question) {
+    let vals = [];
+    if (question.validations.required == true) {
+      vals.push(Validators.required);
+    }
+    if (question.validations.minlength && question.validations.minlength > 0) {
+      vals.push(Validators.minLength(question.validations.minlength));
+    }
+
+    console.log('vals [] :', vals);
+    return vals;
+  }
+
   ngOnInit() {
 
-    this.frmRoleForm = this.fb.group({
-      'roleID': new FormControl('', Validators.required),
-      'Description': new FormControl('', Validators.required)
-    })
+    var data = {
+      "key": "RoleId",
+      "validations": { required: true, minlength: 8 },
+    }
+
+    this.frmRoleForm = this.toFormGroup(data);
+
+    // this.frmRoleForm = this.fb.group({
+    //   'roleID': new FormControl('', Validators.required),
+    //   'Description': new FormControl('', Validators.required)
+    // })
 
     this.roles = [
       { MenuID: 'WM-01', Description: 'Inbound', ModuleID: 'WM', PermissionMode: 0 },
@@ -77,6 +112,20 @@ export class EditRoleComponent implements OnInit {
       { value: '2', label: 'MLL' },
       { value: '3', label: 'LHN' },
     ]
+
+    // will get dynamic label from server 
+    this.cols = [
+      // { field: '#', header: '#', isDropdown: false, style: { 'width': '10%', 'text-align': 'center' } },
+      { field: 'MenuID', header: 'Menu ID', filter: true, sortable: true, style: {} },
+      { field: 'Description', header: 'Description', filter: true, sortable: true },
+      { field: 'ModuleID', header: 'Module ID', filter: true, sortable: true },
+      { field: 'Permission', header: 'Permission', isDropdown: true, filter: false, sortable: false },
+    ];
+
+
+    // get param 
+    let param = this.activateRoute.snapshot.params['id'];
+    console.log('param ', param);
 
   }
 

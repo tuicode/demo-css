@@ -1,13 +1,12 @@
-<button pButton type="button" label="New Role">
+<button pButton type="button" label="New Role" routerLink="/roles/add" class="btn-add">
 </button>
 <div class="box box-primary">
   <div class="box-header with-border">
     <h3 class="box-title">Roles</h3>
   </div>
   <div class="box-body">
-    <ifl-datatable [value]="roles" 
-     [paginator]="false" [editable]="true" (onRowSelect)="onRowSelect($event)">
-      <ifl-column header="#" [filter]="false">
+    <ifl-datatable [value]="roles" resizableColumns="true" [paginator]="false" (onRowSelect)="onRowSelect($event)">
+      <ifl-column header="#" [filter]="false" [sortable]="false">
         <ng-template let-role="rowData" pTemplate="body">
           <a style="text-decoration: underline" routerLink="/roles/{{role.id}}">Edit</a>
         </ng-template>

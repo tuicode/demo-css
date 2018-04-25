@@ -10,8 +10,8 @@ export class AppComponent implements OnInit {
   title = 'infolog demo';
   constructor(private translateService: TranslateService) {
     this.translateService = translateService;
-    this.translateService.setDefaultLang('en');
-    this.translateService.use('en');
+    this.translateService.setDefaultLang('id');
+    this.translateService.use('id');
     //let browserLang = this.translateService.getBrowserLang();
 
     //this.translateService.use(browserLang.match(/en|fr/) ? browserLang : 'en');

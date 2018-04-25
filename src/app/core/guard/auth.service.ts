@@ -26,11 +26,11 @@ export class AuthService extends BaseService {
     // ?? not sure if this the best way to broadcast the status but seems to resolve issue on page refresh where auth status is lost in
     // header component resulting in authed user nav links disappearing despite the fact user is still logged in
     this._authNavStatusSource.next(this.loggedIn);
-    this.baseUrl = "http://localhost:1485/api";
+    this.baseUrl = "http://localhost:1486/api";
   }
 
   login(userName, password) {
-   
+
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http

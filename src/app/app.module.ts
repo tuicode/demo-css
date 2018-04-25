@@ -16,6 +16,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TabViewModule } from 'primeng/tabview';
 // handle global log
 
+
+// helper
+import { ValidationHelper } from './shared/validation/validation-helper';
+
 import { ErrorsHandle } from './errors-handler';
 import { GrowlModule } from 'primeng/growl';
 // templete module
@@ -61,7 +65,7 @@ import { ErrorsComponent } from './core/layouts/errors/errors.component';
 import { RoleComponent } from './pages/ADMIN/role/role.component';
 import { AsnComponent } from './../app/pages/WMS/asn/asn.component';
 import { EditRoleComponent } from './pages/ADMIN/role/edit-role/edit-role.component';
-
+import { DynamicFormComponent } from './shared/dynamic-form/dynamic-form/dynamic-form.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +87,7 @@ import { EditRoleComponent } from './pages/ADMIN/role/edit-role/edit-role.compon
     AsnComponent,
     MenuComponent,
     EditRoleComponent,
+    DynamicFormComponent
   ],
   exports: [
 
@@ -124,6 +129,7 @@ import { EditRoleComponent } from './pages/ADMIN/role/edit-role/edit-role.compon
     LoggerService, NavService, RoleService,
     ErrorsService,
     AppService,
+    ValidationHelper,
     { provide: APP_BASE_HREF, useValue: '/' },
     { provide: ErrorHandler, useClass: ErrorsHandle },
     {

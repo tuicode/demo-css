@@ -12,15 +12,15 @@
           <a style="text-decoration: underline" routerLink="/roles/{{role.id}}">Edit</a>
         </ng-template>
       </ifl-column>
-      <ifl-column field="roleid" header="{{'RoleID' | translate}}"></ifl-column>
-      <ifl-column field="description" header="{{'Description' | translate}}"></ifl-column>
-      <ifl-column field="active" header="{{'Active' | translate}}" styleClass="chkbox-center">
+      <ifl-column field="roleid" header="{{'SysAdmin.Roles.RoleID' | translate}}"></ifl-column>
+      <ifl-column field="description" header="{{'SysAdmin.Roles.Description' | translate}}"></ifl-column>
+      <ifl-column field="active" header="{{'SysAdmin.Roles.Active' | translate}}" styleClass="chkbox-center">
         <ng-template let-role="rowData" pTemplate="body">
           <p-checkbox disabled="true" binary="true" [(ngModel)]="role.active"></p-checkbox>
         </ng-template>
       </ifl-column>
-      <ifl-column field="lastmodifiedby" header="{{'Last Modified By' | translate}}"> </ifl-column>
-      <ifl-column header="{{'Last Modified Date' | translate}}">
+      <ifl-column field="lastmodifiedby" header="{{'SysAdmin.Roles.LastModifiedBy' | translate}}"> </ifl-column>
+      <ifl-column header="{{'SysAdmin.Roles.LastModifiedDate' | translate}}">
         <ng-template let-role="rowData" pTemplate="body">
           {{role.lastmodifieddate | date:'dd/MM/yyyy hh:MM:ss'}}
         </ng-template>

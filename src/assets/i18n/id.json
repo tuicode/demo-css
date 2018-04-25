@@ -1,0 +1,11 @@
+{
+  "Infolog.Common.Message.Character" : "Karakter",
+  "Infolog.Common.Message.Required" : "Kolom ini diperlukan",
+  "Infolog.Common.Message.MaxLength" : "Input dibatasi hanya",
+  "Infolog.Common.Message.MinLength" : "Input tidak kurang dari",
+  "SysAdmin.Roles.RoleID": "Otoritas Id",
+  "SysAdmin.Roles.Description" : "Deskripsi",
+  "SysAdmin.Roles.Active" : "Aktif",
+  "SysAdmin.Roles.LastModifiedBy"  : "Terakhir Dimodifikasi Oleh",
+  "SysAdmin.Roles.LastModifiedDate"  : "Terakhir Dimodifikasi Tanggal"
+}

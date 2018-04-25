@@ -5,6 +5,7 @@ import { IFLDataTableModule } from './../shared/ui/customizedComponents/ifl-data
 import { IFLSharedModule } from './../shared/ui/customizedComponents/ifl-shared.module';
 import { CheckboxModule } from 'primeng/primeng';
 
+
 @NgModule({
   imports: [
     IFLDataTableModule,
@@ -18,6 +19,7 @@ import { CheckboxModule } from 'primeng/primeng';
     IFLSharedModule,
     IFLDataTableModule,
     CheckboxModule
+
   ],
   declarations: []
 })

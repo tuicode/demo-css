@@ -1,0 +1,12 @@
+.ui-message {
+    border: 1px solid;
+    margin: 0px 0px !important;
+    padding: .25em .5em;
+    display: inline-block;
+    margin-top: 5px !important;
+    width: 100%;
+}
+
+.fl-right{
+    float: right !important;
+}

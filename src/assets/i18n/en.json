@@ -1,8 +1,11 @@
 {
-  "RoleID": "Role ID",
-  "Description" : "Description",
-  "Active" : "Active",
-  "Last Modified By"  : "Last Modified By",
-  "Last Modified Date"  : "Last Modified Date",
-  "Admin.Roles.RoleID" : "Menu ID"
+  "Infolog.Common.Message.Character" : "Character",
+  "Infolog.Common.Message.Required" : "This Field Required",
+  "Infolog.Common.Message.MaxLength" : "Max character.",
+  "Infolog.Common.Message.MinLength" : "Min character.",
+  "SysAdmin.Roles.RoleID": "Role ID",
+  "SysAdmin.Roles.Description" : "Description",
+  "SysAdmin.Roles.Active" : "Active",
+  "SysAdmin.Roles.LastModifiedBy"  : "Last Modified By",
+  "SysAdmin.Roles.LastModifiedDate"  : "Last Modified Date"
 }

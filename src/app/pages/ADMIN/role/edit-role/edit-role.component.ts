@@ -1,8 +1,10 @@
-import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+/* tslint:disable */
+
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, OnChanges, AfterViewInit } from '@angular/core';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
-
-
+import { ValidationHelper } from './../../../../shared/validation/validation-helper';
+import { RoleService } from './../services/role.service';
 
 interface RoleDTO {
   MenuID: string;
@@ -25,9 +27,11 @@ interface UserDTO {
 })
 
 
-export class EditRoleComponent implements OnInit {
-
+export class EditRoleComponent implements AfterViewInit {
+  //formgroup: FormGroup;
+  roleForm: any
   selectPermission: string;
+  resultValidator: any;
   permissionList: SelectItem[];
   companies: SelectItem[]
   roles: RoleDTO[];
@@ -35,21 +39,52 @@ export class EditRoleComponent implements OnInit {
   isShowAllFields: boolean = true;
   display: boolean = false;
   users: UserDTO[];
+  isFormRender: boolean = false;
   constructor(
     private fb: FormBuilder,
-    private cdr: ChangeDetectorRef
-  ) { }
-
-  ngAfterViewInit() {
-    this.cdr.detectChanges();
+    private cdr: ChangeDetectorRef,
+    private validationHelper: ValidationHelper,
+    private roleService: RoleService,
+  ) {
   }
 
   ngOnInit() {
+    var resp = {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "title": "Role",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "RoleId",
+        "CreatedAt",
+        "Description",
+        "LastModifiedBy"
+      ],
+      "properties": {
+        "RoleId": {
+          "type": "string",
+          "maxLength": 7,
+          "minLength": 3
+        },
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time",
+        },
+        "Description": {
+          "type": "string",
+          "maxLength": 7,
+        },
+        "LastModifiedBy": {
+          "type": "string",
+          "format": "date-time"
+        },
+      }
+    };
 
-    this.frmRoleForm = this.fb.group({
-      'roleID': new FormControl('', Validators.required),
-      'Description': new FormControl('', Validators.required)
-    })
+
+    // this.frmRoleForm = this.validationHelper.addRequiredValidation(resp)
+    // this.loadSchema();
+    this.roleForm = resp;
 
     this.roles = [
       { MenuID: 'WM-01', Description: 'Inbound', ModuleID: 'WM', PermissionMode: 0 },
@@ -81,24 +116,21 @@ export class EditRoleComponent implements OnInit {
   }
 
 
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
+  }
+
   hideFields(): void {
     this.isShowAllFields = !this.isShowAllFields;
   }
 
   onSelectedPermission(event, role) {
-    console.log('event ===========', event)
-    console.log('role =============', role)
     this.showDialog();
 
   }
 
   onSelectedCompany(event, user) {
-    console.log('event company ===========', event)
-    console.log('user =============', user);
-
   }
-
-
 
   showDialog() {
     this.display = true;
@@ -107,4 +139,9 @@ export class EditRoleComponent implements OnInit {
   hideDialog() {
     this.display = false;
   }
+
+  // loadSchema(): void {
+  //   this.roleService.getJsonSchema('http://localhost:1486/api/Roles/GetSchema').subscribe(
+  //     data => { this.roleForm = data });
+  // }
 }

@@ -7,7 +7,7 @@ import { String, StringBuilder } from 'typescript-string-operations';
   // tslint:disable-next-line:component-selector
   selector: 'ifl-dynamic-form',
   template: `
-  <form novalidate (ngSubmit)="onSubmit(form.value)" [formGroup]="form">
+  <form novalidate  [formGroup]="form">
     <div class="box-body">
       <div *ngFor="let prop of objectProps">
           <div class="form-group">

@@ -1,4 +1,4 @@
-<p-growl [value]="msgs" sticky="sticky"></p-growl>
+<p-growl sticky="sticky"></p-growl>
 
 <div *ngFor="let item of tickets"> ... </div>
 
@@ -36,7 +36,7 @@
             </div>
             <table *ngIf="isShowAllFields">
                 <tr class="tr-h">
-                    <td class="td-p-left">Created by {{tickets}}</td>
+                    <td class="td-p-left">Created by</td>
                     <td>
                         <span>Roberto Carlos</span>
                     </td>
@@ -98,7 +98,7 @@
                     <button pButton type="button" label="Add User" class="ui-button-secondary"></button>
                 </div>
                 <div class="box-body">
-                    <ifl-datatable #dtuser [value]="users" [(selection)]="selection">
+                    <ifl-datatable #dtuser [value]="users">
                         <ifl-column header="#" [filter]="false" [style]="{'width':'5%','text-align': 'center'}">
                             <ng-template pTemplate="body">
                                 <i class="fa fa-trash" aria-hidden="true"></i>

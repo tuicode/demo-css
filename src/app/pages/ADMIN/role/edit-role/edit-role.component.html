@@ -68,20 +68,27 @@
             <p-tabPanel header="Permissions" style="border-top: 0;">
                 <div class="box-body">
                     <ifl-datatable #dtpermission [value]="roles">
-                        <ifl-column header="#" [filter]="false" [style]="{'width':'5%','text-align': 'center'}">
+                        <ifl-column header="#" [filter]="false" [style]="{'width':'10%', 'text-align': 'center'}">
                             <ng-template pTemplate="body">
                                 <p-checkbox binary="true"></p-checkbox>
                             </ng-template>
                         </ifl-column>
-                        <ifl-column field="MenuID" header="Menu ID" [style]="{'width':'25%'}"></ifl-column>
-                        <ifl-column field="Description" header="Description" [style]="{'width':'25%'}"> </ifl-column>
-                        <ifl-column field="ModuleID" header="Module ID" [style]="{'width':'20%'}"></ifl-column>
-                        <ifl-column field="PermissionID" header="Permission" [style]="{'width':'25%'}" filterMatchMode="equals">
-                            <ng-template pTemplate="body" let-col let-role="rowData" pTemplate="body">
-                                <p-dropdown #dd [options]="permissionList" [style]="{'width':'150px'}" [(ngModel)]="role[col.field]" appendTo="body" [ngModelOptions]="{standalone: true}"
+
+                        <ifl-column *ngFor="let col of cols" [style]="col.style" [field]="col.field" [header]="col.header" [sortable]="col.sortable"
+                            [filter]='col.filter'>
+                            <ng-template pTemplate="body" let-col let-role="rowData" pTemplate="body" *ngIf="col.isDropdown">
+                                <p-dropdown #dd [options]="permissionList" [(ngModel)]="role[col.field]" appendTo="body" [ngModelOptions]="{standalone: true}"
                                     (onChange)="onSelectedPermission($event.value,role)" *ngIf="role.PermissionMode !== 0"></p-dropdown>
                             </ng-template>
                         </ifl-column>
+
+
+                        <!-- <ifl-column field="PermissionID" header="Permission" [filter]="false" [sortable]="false" filterMatchMode="equals">
+                            <ng-template pTemplate="body" let-col let-role="rowData" pTemplate="body">
+                                <p-dropdown #dd [options]="permissionList" [(ngModel)]="role[col.field]" appendTo="body" [ngModelOptions]="{standalone: true}"
+                                    (onChange)="onSelectedPermission($event.value,role)" *ngIf="role.PermissionMode !== 0"></p-dropdown>
+                            </ng-template>
+                        </ifl-column> -->
                     </ifl-datatable>
                 </div>
 
@@ -91,18 +98,18 @@
                     <button pButton type="button" label="Add User" class="ui-button-secondary"></button>
                 </div>
                 <div class="box-body">
-                    <ifl-datatable #dtuser [value]="users" [editable]="true" [(selection)]="selection">
+                    <ifl-datatable #dtuser [value]="users" [(selection)]="selection">
                         <ifl-column header="#" [filter]="false" [style]="{'width':'5%','text-align': 'center'}">
                             <ng-template pTemplate="body">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </ng-template>
                         </ifl-column>
-                        <ifl-column field="UserID" header="User ID" [filter]="false" [style]="{'width':'30%'}"></ifl-column>
-                        <ifl-column field="UserName" [editable]="true" header="Full Name" [filter]="false" [style]="{'width':'30%'}"> </ifl-column>
-                        <ifl-column field="companies" [filter]="false" header="Company Name" [editable]="true">
+                        <ifl-column field="UserID" header="User ID" [style]="{'width':'30%'}"></ifl-column>
+                        <ifl-column field="UserName" header="Full Name" [style]="{'width':'30%'}"> </ifl-column>
+                        <ifl-column field="companies" header="Company Name">
                             <ng-template let-col let-user="rowData" pTemplate="editor">
                                 <p-dropdown #ddcompany [options]="companies" [style]="{'width':'150px'}" [(ngModel)]="user[col.field]" required="true" appendTo="body"
-                                    [ngModelOptions]="{standalone: true}" (onChange)="onSelectedCompany($event.value,user)"></p-dropdown>
+                                    [ngModelOptions]="{standalone: true}"></p-dropdown>
                             </ng-template>
                         </ifl-column>
                     </ifl-datatable>
@@ -111,8 +118,8 @@
         </p-tabView>
     </div>
 </div>
-
-<button type="button" pButton icon="fa-external-link-square" label="Show" (click)="showDialog()"></button>
+<!-- 
+<button type="button" pButton icon="fa-external-link-square" label="Show" (click)="showDialog()"></button> -->
 
 
 <p-dialog header="Permissions" [(visible)]="display" modal="modal" [width]="650" [minWidth]="300" [minY]="70">
@@ -138,10 +145,10 @@
                                 <p-checkbox binary="true"></p-checkbox>
                             </ng-template>
                         </ifl-column>
-                        <ifl-column field="MenuID" header="Menu ID" [filter]="false" [style]="{'width':'25%'}"></ifl-column>
-                        <ifl-column field="Description" header="Description" [filter]="false" [style]="{'width':'25%'}"> </ifl-column>
-                        <ifl-column field="ModuleID" header="Module ID" [filter]="false" [style]="{'width':'20%'}"></ifl-column>
-                        <ifl-column field="PermissionID" header="Permission" [filter]="false" [style]="{'width':'25%'}" filterMatchMode="equals">
+                        <ifl-column field="MenuID" header="Menu ID" [style]="{'width':'25%'}"></ifl-column>
+                        <ifl-column field="Description" header="Description" [style]="{'width':'25%'}"> </ifl-column>
+                        <ifl-column field="ModuleID" header="Module ID" [style]="{'width':'20%'}"></ifl-column>
+                        <ifl-column field="PermissionID" header="Permission" [style]="{'width':'25%'}" filterMatchMode="equals">
                             <ng-template pTemplate="body" let-col let-role="rowData" pTemplate="body">
                                 <p-dropdown #dd [options]="permissionList" [(ngModel)]="role[col.field]" appendTo="body" [ngModelOptions]="{standalone: true}"
                                     (onChange)="onSelectedPermission($event.value,role)" *ngIf="role.PermissionMode !== 0"></p-dropdown>

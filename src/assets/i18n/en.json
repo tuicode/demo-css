@@ -7,5 +7,13 @@
   "SysAdmin.Roles.Description" : "Description",
   "SysAdmin.Roles.Active" : "Active",
   "SysAdmin.Roles.LastModifiedBy"  : "Last Modified By",
-  "SysAdmin.Roles.LastModifiedDate"  : "Last Modified Date"
+  "SysAdmin.Roles.LastModifiedDate"  : "Last Modified Date",
+  "btnsave": "Save",
+  "btn": "Cancel",
+  "showallfieds": "Show all fields",
+  "tabpermissions": "Permissions",
+  "tabuser": "Users",
+  "popupTitle": "Permissions",
+  "pagingShow": "Show",
+  "pagingRow": "Rows"
 }

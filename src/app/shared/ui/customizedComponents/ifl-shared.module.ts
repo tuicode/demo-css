@@ -46,7 +46,7 @@ export class IFLColumn implements AfterContentInit {
     @Input() filterField: string;
     @Input() header: string;
     @Input() footer: string;
-    @Input() sortable: any;
+    @Input() sortable: any = true;
     @Input() editable: boolean;
     @Input() filter: boolean = true;
     @Input() filterMatchMode: string;
@@ -81,7 +81,12 @@ export class IFLColumn implements AfterContentInit {
     public filterTemplate: TemplateRef<any>;
     public editorTemplate: TemplateRef<any>;
 
+    constructor() {
+
+    }
     ngAfterContentInit(): void {
+
+        console.log('filter ', this.filter);
         this.templates.forEach((item) => {
             switch (item.getType()) {
                 case 'header':

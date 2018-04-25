@@ -5,6 +5,8 @@ import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms'
 import { SelectItem } from 'primeng/api';
 import { ValidationHelper } from './../../../../shared/validation/validation-helper';
 import { RoleService } from './../services/role.service';
+import { ActivatedRoute } from '@angular/router';
+
 
 interface RoleDTO {
   MenuID: string;
@@ -39,14 +41,16 @@ export class EditRoleComponent implements AfterViewInit {
   isShowAllFields: boolean = true;
   display: boolean = false;
   users: UserDTO[];
-  isFormRender: boolean = false;
+  cols: any[];
+
   constructor(
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
+    public activateRoute: ActivatedRoute,
     private validationHelper: ValidationHelper,
-    private roleService: RoleService,
-  ) {
-  }
+
+  ) { }
+
 
   ngOnInit() {
     var resp = {
@@ -81,9 +85,6 @@ export class EditRoleComponent implements AfterViewInit {
       }
     };
 
-
-    // this.frmRoleForm = this.validationHelper.addRequiredValidation(resp)
-    // this.loadSchema();
     this.roleForm = resp;
 
     this.roles = [
@@ -112,6 +113,20 @@ export class EditRoleComponent implements AfterViewInit {
       { value: '2', label: 'MLL' },
       { value: '3', label: 'LHN' },
     ]
+
+    // will get dynamic label from server 
+    this.cols = [
+      // { field: '#', header: '#', isDropdown: false, style: { 'width': '10%', 'text-align': 'center' } },
+      { field: 'MenuID', header: 'Menu ID', filter: true, sortable: true, style: {} },
+      { field: 'Description', header: 'Description', filter: true, sortable: true },
+      { field: 'ModuleID', header: 'Module ID', filter: true, sortable: true },
+      { field: 'Permission', header: 'Permission', isDropdown: true, filter: false, sortable: false },
+    ];
+
+
+    // get param 
+    let param = this.activateRoute.snapshot.params['id'];
+    console.log('param ', param);
 
   }
 

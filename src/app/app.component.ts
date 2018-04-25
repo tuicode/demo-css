@@ -13,14 +13,11 @@ export class AppComponent implements OnInit {
     this.translateService.setDefaultLang('id');
     this.translateService.use('id');
     //let browserLang = this.translateService.getBrowserLang();
-
     //this.translateService.use(browserLang.match(/en|fr/) ? browserLang : 'en');
 
   }
 
   ngOnInit() {
-    var obj = { a: 1 };
-    var copy = Object.assign({}, {a :1},{b: 2, c:3});
-    console.log(copy); // { a: 1 }
+
   }
 }

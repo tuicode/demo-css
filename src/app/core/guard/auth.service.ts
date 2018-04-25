@@ -46,6 +46,7 @@ export class AuthService extends BaseService {
         return true;
       })
       .catch(this.handleError);
+   // localStorage.setItem('auth_token', 'abc');
   }
 
   logout() {
